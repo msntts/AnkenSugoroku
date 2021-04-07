@@ -1,0 +1,39 @@
+.station-under-level {
+    position: absolute;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.station-over-level {
+    position: relative;
+    height: 85%;
+    width: 85%;
+    top: 5px;
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+    display: table;
+}
+
+.station-over-level-border {
+    border: solid 1.5px white;
+}
+
+.content {
+    margin: auto;
+    text-align: center;
+}
+
+.station-content-region {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    overflow: hidden;
+}
+
+.station-content {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-wrap: wrap;
+}
