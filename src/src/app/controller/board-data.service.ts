@@ -35,22 +35,20 @@ export class BoardDataService {
      * ファイルからデータを読み込む
      * @returns データ
      */
-    public fetchData(): Promise<boolean> {
-        return new Promise<boolean> ((resolve, reject) => {
-            // ファイルから読みこむ
-            this.http.get('assets/BoardData.json', {responseType: 'text'})
-            .subscribe(
-                data => {
-                    // データをセットする
-                    this.boardDataModel.setData(data);
-                    // 表示するマスの情報を返す
-                    return resolve(true);
-                },
-                error => {
-                    return reject(error);
-                }
-            );
-        });
+    public fetchData() {
+        // ファイルから読みこむ
+        this.http.get('assets/BoardData.json', {responseType: 'text'})
+        .subscribe(
+            data => {
+                // データをセットする
+                this.boardDataModel.setData(data);
+                // 購読先に通知する
+                this.subject.next();
+            },
+            error => {
+                this.subject.error(error);
+            }
+        );
     }
 
     /**
@@ -85,6 +83,22 @@ export class BoardDataService {
     public findSquare(squareId: number): DisplayItemSquare {
         return this.boardDataModel.findSquare(squareId);
     }
+
+    /**
+     * 全てのマス情報から指定された位置座標に存在するマス情報を取得する
+     * @param x x座標
+     * @param y y座標
+     * @returns マス情報
+     */
+    public findSquareByPosition(x: number, y: number): DisplayItemSquare {
+        let result = null;
+        this.boardDataModel.Squares.forEach((square: DisplayItemSquare) => {
+            if (square.X <= x && x <= square.X + square.Width && square.Y <= y && y <= square.Y + square.Height) {
+                result = square;
+            }
+        })
+        return result;
+    }
     
     /**
      * 全ての線情報を取得する
@@ -92,5 +106,21 @@ export class BoardDataService {
      */
      public getLines(): Array<DisplayItemLine> {
         return this.boardDataModel.Lines;
+    }
+
+    /**
+     * 指定したIDから指定したIDへ遷移できるかどうかを調べる
+     * @param sourceId 遷移元のID
+     * @param targetId 遷移先のID
+     */
+    public isMovable(sourceId: number, targetId: number): boolean {
+        let isMovable = false;
+        this.boardDataModel.Lines.forEach(line => {
+            if (Number(line.sourceId) === sourceId && Number(line.targetId) === targetId) {
+                isMovable = true;
+            }
+        });
+
+        return isMovable;
     }
 }

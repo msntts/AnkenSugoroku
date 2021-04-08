@@ -1,6 +1,7 @@
 <div class="main-content">
     <div *ngFor="let square of squares">
-        <app-project-board-game-square [square]="square" ></app-project-board-game-square>
+        <app-project-board-game-square [square]="square"></app-project-board-game-square>
     </div>
     <canvas id="canvas1" #canvas1 width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
+    <app-project-board-game-piece [id]="projectId"></app-project-board-game-piece>
 </div>

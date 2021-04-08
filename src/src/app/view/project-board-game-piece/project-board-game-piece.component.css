@@ -1,0 +1,18 @@
+.piece {
+    position: absolute;
+}
+
+.person {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.car {
+    position: absolute;
+    top: 10px;
+    width: 100px;
+    height: 100px;
+}

@@ -20,6 +20,8 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   public canvasHeight: number;
   /** マス情報 */
   public squares: Array<DisplayItemSquare> = new Array<DisplayItemSquare>();
+  /** 表示するプロジェクトのID */
+  public projectId = 3;
 
   /**
    * コンストラクタ
@@ -35,8 +37,9 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
    */
   ngOnInit() {
     // サービスから取得したデータをモデルにセットする
-    this.boardDataService.fetchData()
-    .then(() => {
+    this.boardDataService.fetchData();
+    // 読み込み待ち
+    this.boardDataService.observable.subscribe(() => {
       // キャンバス情報を設定
       this.canvas1.nativeElement.width = this.boardDataService.getCanvasWidth();
       this.canvas1.nativeElement.height = this.boardDataService.getCanvasHeight();
@@ -44,9 +47,6 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
       this.squares = this.boardDataService.getSquares();
       // 要素をつなぐ線を描画する
       this.drawConnectors();
-  })
-    .catch((error) => {
-      alert(`Can't read square data file: [${error}]`);
     });
   }
 
@@ -113,12 +113,13 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
       // 曲線描画
       case ConnectLineType.Curve:
         // TODO: 接続場所等によって、作成する線を変更すること
+        const offset = 20;
         // まずは上へ
-        this.context.lineTo(beginPoint.x, endPoint.y - 10);
-        this.context.moveTo(beginPoint.x, endPoint.y - 10);
+        this.context.lineTo(beginPoint.x, endPoint.y - offset);
+        this.context.moveTo(beginPoint.x, endPoint.y - offset);
         // 横へ
-        this.context.lineTo(endPoint.x, endPoint.y - 10);
-        this.context.moveTo(endPoint.x, endPoint.y - 10);
+        this.context.lineTo(endPoint.x, endPoint.y - offset);
+        this.context.moveTo(endPoint.x, endPoint.y - offset);
         // 下
         this.context.lineTo(endPoint.x, endPoint.y);
         break;
