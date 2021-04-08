@@ -15,6 +15,9 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   /** 位置座標y */
   public y: string = '0px';
 
+  /* フィルタ */
+  public filter: string = "";
+
   /** 駒のマス内判定点までのオフセット（左上から） X方向 */
   private readonly c_offset_x: number = 50;
   /** 駒のマス内判定点までのオフセット（左上から） Y方向 */
@@ -52,7 +55,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
    * ドラッグ完了時のイベント
    * @param event 
    */
-  onDragEnded(event: any) {
+  async onDragEnded(event: any) {
     // ドラッグしているアイテムの位置情報を取得する
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
     // 移動距離を取得する
@@ -75,6 +78,22 @@ export class ProjectBoardGamePieceComponent implements OnInit {
         this.y = `${square.Y}px`;
         // id更新
         this.id = square.Id;
+      }else{
+        // 移動できない場合
+
+        // 色を反転させるアニメーションを表示
+        await this.sleep(100);
+        this.filter="invert(100%)";
+        await this.sleep(100);
+        this.filter="invert(0%)";
+        await this.sleep(100);
+        this.filter="invert(100%)";
+        await this.sleep(100);
+        this.filter="invert(0%)";
+        await this.sleep(100);
+        this.filter="invert(100%)";
+        await this.sleep(100);
+        this.filter="";
       }
     }
 
@@ -82,4 +101,16 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     // （位置情報をそのまま変更しているので、ドラッグ情報を削除しておかないと、その分移動されてしまう）
     event.source._dragRef.reset();
   }
+
+    /**
+   * 指定された時間、処理を中断する
+   * 本処理を呼び出す場合は、awaitをつけてください。
+   * @param milliseconds ミリ秒
+   */
+     private sleep(milliseconds: number) {
+      return new Promise<void>(resolve => {
+        setTimeout(() => resolve(), milliseconds);
+      });
+    }
+  
 }
