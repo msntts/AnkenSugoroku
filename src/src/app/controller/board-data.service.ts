@@ -12,6 +12,10 @@ import { DisplayItemLine } from '../model/display-item-line.model';
     providedIn: 'root',
 })
 export class BoardDataService {
+  
+    /** 駒が進める方向を両方向にするか、片方向とするかの制御フラグ */
+    private readonly moveBidirection: boolean = true;
+  
     /** 盤情報モデル */
     private boardDataModel: BoardDataModel = new BoardDataModel();
 
@@ -116,8 +120,16 @@ export class BoardDataService {
     public isMovable(sourceId: number, targetId: number): boolean {
         let isMovable = false;
         this.boardDataModel.Lines.forEach(line => {
+            // 順方向
             if (Number(line.sourceId) === sourceId && Number(line.targetId) === targetId) {
                 isMovable = true;
+            }
+            // 両方向への移動が可能な設定の場合は、逆方向も検索する
+            if(this.moveBidirection){
+                // 逆方向
+                if (Number(line.sourceId) === targetId && Number(line.targetId) === sourceId) {
+                    isMovable = true;
+                }
             }
         });
 
