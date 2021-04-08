@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model'
-import { DisplayItemService } from 'src/app/controller/display-item.service';
+import { BoardDataService } from 'src/app/controller/board-data.service';
 
 
 @Component({
@@ -34,9 +34,9 @@ export class ProjectBoardGameSquareComponent implements OnInit {
    * @param unitService 機器情報サービス
    */
   constructor(
-    private displayItemService: DisplayItemService,
+    private boardDataService: BoardDataService,
   ) {
-    this.displayItemService.observable.subscribe(() =>
+    this.boardDataService.observable.subscribe(() =>
       this.OnInit()
     );
   }

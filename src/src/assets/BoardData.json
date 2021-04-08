@@ -1,0 +1,181 @@
+{
+    "board": {
+        "width": 1000,
+        "height": 500
+    },
+    "squares": [
+        {
+            "id": 1,
+            "x": 10,
+            "y": 65,
+            "width": 80,
+            "height": 50,
+            "content": "START",
+            "color": "white",
+            "backgroundColor": "blue"
+        },
+        {
+            "id": 2,
+            "x": 130,
+            "y": 40,
+            "width": 100,
+            "height": 100,
+            "content": "活動内容が決まっていない",
+            "color": "black",
+            "backgroundColor": "yellow"
+        },
+        {
+            "id": 3,
+            "x": 280,
+            "y": 40,
+            "width": 150,
+            "height": 100,
+            "content": "工程・アウトプットが合意できている",
+            "color": "white",
+            "backgroundColor": "green"
+        },
+        {
+            "id": 4,
+            "x": 480,
+            "y": 40,
+            "width": 150,
+            "height": 100,
+            "content": "計画に対して概ね順調に進んでいる",
+            "color": "white",
+            "backgroundColor": "green"
+        },
+        {
+            "id": 5,
+            "x": 680,
+            "y": 40,
+            "width": 150,
+            "height": 100,
+            "content": "中間生成物などを確認してもらい齟齬なし",
+            "color": "white",
+            "backgroundColor": "green"
+        },
+        {
+            "id": 6,
+            "x": 440,
+            "y": 330,
+            "width": 150,
+            "height": 100,
+            "content": "問題が発生し計画の見直しが必要",
+            "color": "white",
+            "backgroundColor": "red"
+        },
+        {
+            "id": 7,
+            "x": 680,
+            "y": 330,
+            "width": 150,
+            "height": 100,
+            "content": "計画より遅延しているがキャッチアップできると予想",
+            "color": "black",
+            "backgroundColor": "yellow"
+        },
+        {
+            "id": 8,
+            "x": 900,
+            "y": 65,
+            "width": 80,
+            "height": 50,
+            "content": "GOAL",
+            "color": "white",
+            "backgroundColor": "blue"
+        }
+    ],
+    "lines": [
+        {
+            "sourceId": 1,
+            "sourcePoint": "right",
+            "targetId": 2,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 1,
+            "sourcePoint": "top",
+            "targetId": 3,
+            "targetPoint": "top",
+            "connectType": "curve"
+        },
+        {
+            "sourceId": 2,
+            "sourcePoint": "right",
+            "targetId": 3,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 3,
+            "sourcePoint": "right",
+            "targetId": 4,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 3,
+            "sourcePoint": "bottom",
+            "targetId": 7,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 4,
+            "sourcePoint": "right",
+            "targetId": 5,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 4,
+            "sourcePoint": "bottom",
+            "targetId": 6,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 5,
+            "sourcePoint": "right",
+            "targetId": 8,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 5,
+            "sourcePoint": "bottom",
+            "targetId": 6,
+            "targetPoint": "right",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 6,
+            "sourcePoint": "left",
+            "targetId": 1,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 6,
+            "sourcePoint": "top",
+            "targetId": 3,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 7,
+            "sourcePoint": "top",
+            "targetId": 4,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 7,
+            "sourcePoint": "left",
+            "targetId": 6,
+            "targetPoint": "right",
+            "connectType": "direct"
+        }
+    ]
+}

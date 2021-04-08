@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 // Service
-import { DisplayItemService } from './controller/display-item.service';
+import { BoardDataService } from './controller/board-data.service';
 // Components
 import { AppComponent } from './app.component';
 import { ProjectBoardGameComponent } from './view/project-board-game/project-board-game.component';
@@ -19,7 +19,7 @@ import { ProjectBoardGameSquareComponent } from './view/project-board-game-squar
     HttpClientModule
   ],
   providers: [
-    DisplayItemService
+    BoardDataService
   ],
   bootstrap: [AppComponent]
 })
