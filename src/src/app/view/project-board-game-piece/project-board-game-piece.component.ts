@@ -15,6 +15,11 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   /** 位置座標y */
   public y: string = '0px';
 
+  /** 駒のマス内判定点までのオフセット（左上から） X方向 */
+  private readonly c_offset_x: number = 50;
+  /** 駒のマス内判定点までのオフセット（左上から） Y方向 */
+  private readonly c_offset_y: number = 50;
+  
   /**
    * コンストラクタ
    * @param boardDataService 盤情報サービス
@@ -55,8 +60,13 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     // 新しい座標を定義する
     const newX = offsetLeft + x;
     const newY = offsetTop + y;
+
     // マスにいるかどうか
-    const square = this.boardDataService.findSquareByPosition(newX, newY);
+    // ※マスの中にいるかどうかの判定時、駒の左上座標を用いるとユーザーの操作感と不一致が生じる。
+	// (駒の左上がマス内に入っていないと、	「マス内に入っていない」と判定されてしまう)
+    //   このため、マスの中にいるかどうかの判定に用いる点は、左上座標からオフセット分画像の内側に入った位置を用いる
+    const square = this.boardDataService.findSquareByPosition(newX + this.c_offset_x, newY + this.c_offset_y);
+
     if (square != null) {
       // 現在の状態から移動できるマスかどうか
       if (this.boardDataService.isMovable(this.id, square.Id)) {
