@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
+import { RecordService} from 'src/app/controller/record.service';
 
 @Component({
   selector: 'app-project-board-game-piece',
@@ -29,6 +30,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
    */
    constructor(
     private boardDataService: BoardDataService,
+    private recordService: RecordService,
   ) {
     this.boardDataService.observable.subscribe(() => {
       this.OnInit()}
@@ -36,6 +38,8 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   }
 
   ngOnInit() {
+    // 最後のマスの位置を取得
+    this.id = this.recordService.getLatestSquareId();
   }
 
   OnInit(): void {
@@ -76,8 +80,16 @@ export class ProjectBoardGamePieceComponent implements OnInit {
         // 移動する
         this.x = `${square.X}px`;
         this.y = `${square.Y}px`;
+
+        // 移動履歴を記録
+        this.recordService.addMoveRecord(this.id, square.Id);
+
         // id更新
         this.id = square.Id;
+        
+        // 最新のidを更新
+        this.recordService.setLatestSquareId(this.id);
+
       }else{
         // 移動できない場合
 
