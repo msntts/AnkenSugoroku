@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model'
-
+import { ConfigService} from 'src/app/controller/config.service'
 
 @Component({
   selector: 'app-project-board-game-square',
@@ -27,11 +27,13 @@ export class ProjectBoardGameSquareComponent implements OnInit {
   public color = '';
   /** 背景色 */
   public backgroundColor = '';
+  /** フォントサイズ */
+  public fontsize:string = '';
 
   /**
    * コンストラクタ
    */
-  constructor() {}
+  constructor(private configservice: ConfigService ) {}
 
   /**
    * 初期化処理
@@ -45,5 +47,6 @@ export class ProjectBoardGameSquareComponent implements OnInit {
     this.content = this.square.Content;
     this.color = this.square.Color;
     this.backgroundColor = this.square.BackgroundColor;
+    this.fontsize = this.configservice.getFontSize().toString() + "px";
   }
 }
