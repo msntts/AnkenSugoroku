@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  anken:
+    image: nginx
+    container_name: ankensugoroku
+    ports:
+      - 8081:80
+    volumes:
+      - ../../src/dist/project-board-game:/usr/share/nginx/html
+

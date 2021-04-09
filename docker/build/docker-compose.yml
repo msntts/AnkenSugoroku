@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  ankenbuild:
+    image: ankenbuild:1.0
+    build:
+      context: .
+      args:
+        - http_proxy=${http_proxy}
+        - https_proxy=${https_proxy}
+        - HTTP_PROXY=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
+    container_name: ankenbuild
+    volumes:
+      - "../../src:/src"
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - HTTP_PROXY=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+    working_dir: /src
+    entrypoint: /startup.sh
