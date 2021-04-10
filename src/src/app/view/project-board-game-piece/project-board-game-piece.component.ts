@@ -23,7 +23,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   public opacity: number = 1.0;
 
   /* 移動元の表示 */
-  private fromMarkOn: boolean = false;
+  public fromMarkOn: boolean = false;
 
 
   /** 駒のマス内判定点までのオフセット（左上から） X方向 */
