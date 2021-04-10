@@ -1,6 +1,7 @@
 .station-under-level {
     position: absolute;
     border-radius: 10px 10px 10px 10px;
+    box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .station-over-level {

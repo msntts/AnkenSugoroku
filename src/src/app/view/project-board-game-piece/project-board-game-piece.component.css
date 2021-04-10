@@ -1,7 +1,9 @@
 .piece {
     position: absolute;
 }
-
+.fromMark {
+    position: absolute;
+}
 .person {
     position: absolute;
     top: 0px;
