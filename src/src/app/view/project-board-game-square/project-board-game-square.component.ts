@@ -30,6 +30,9 @@ export class ProjectBoardGameSquareComponent implements OnInit {
   /** フォントサイズ */
   public fontsize:string = '';
 
+  /* JSONファイル内のHTMLを許可する */
+  public enableHtml:boolean = true;
+
   /**
    * コンストラクタ
    */
