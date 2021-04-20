@@ -5,7 +5,8 @@
 
 ## 要求管理
 [Github Projects](https://github.com/msntts/AnkenSugoroku/projects/1)で管理中。  
-Issuesに登録してもProjectsに反映される(はず)
+Issuesに登録してもProjectsに反映される(はず)  
+画面仕様に関しては、[github pages](https://msntts.github.io/AnkenSugoroku/)参照の事
 
 ## 設計思想
 DDDを試してみたい。  
