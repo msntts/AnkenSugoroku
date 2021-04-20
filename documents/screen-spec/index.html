@@ -1,0 +1,50 @@
+<html>
+<title>案件すごろく</title>
+<script>
+    function set_to_comment(tr) {
+        document.getElementById('comment').innerText = tr.childNodes[2].innerText;
+    }
+</script>
+<body>
+    <div style="display:flex;flex-wrap: wrap;">
+        <div style="width:70%">
+            <!--マップ画面-->
+            <img src="img/sugoroku-map.png" />
+        </div>
+        <div style="width:30%">
+            <!--ログ画面-->
+            <table>
+                <!--ログリスト-->
+                <tr>
+                    <th>日時</th><th>コメント</th>
+                </tr>
+                <tr onclick="set_to_comment(this)">
+                    <td>2021/04/20</td><td>サンプルを作って見た。</td>
+                </tr>
+                <tr onclick="set_to_comment(this)">
+                    <td>2021/04/21</td><td>↓みたいにコメントはなくてもいい。</td>
+                </tr>
+                <tr onclick="set_to_comment(this)">
+                    <td>2021/04/21</td><td></td>
+                </tr>
+                <tr onclick="set_to_comment(this)">
+                    <td>2021/04/21</td><td>アイコンをクリックするとアイコンに応じてログが変わるようにしたい。</td>
+                </tr>
+                <tr onclick="set_to_comment(this)">
+                    <td>2021/04/21</td><td>ログをクリックするとテキストエリアに現在のログを表示したい。</td>
+                </tr>
+            </table>
+            <div>
+                <!--コメント入力-->
+                <div>
+                    <textarea id="comment"></textarea>
+                </div>
+                <div>
+                    <input type="button" value="更新">
+                    <input type="button" value="削除">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
