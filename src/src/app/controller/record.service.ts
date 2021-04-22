@@ -1,16 +1,25 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 
-// コンフィグデータのインターフェース定義
+// レコードデータのインターフェース定義
 export interface recordData {
   moverecord: elemMoveRecord[]    // 移動履歴
-  latest_square_id: number  // 最後にいたマスのID
+  status: elemPieceStatus[]       // 駒の現在情報（ステータス）
 }
 
 export interface elemMoveRecord{
+  piece_id: number    // 駒のID
   date: string,       // 移動した日時（ISO形式）
   from_id: number,    // 移動元のマスのID
   to_id: number,      // 移動先のマスのID
+}
+
+export interface elemPieceStatus{
+  piece_id: number    // 駒のID
+  square_id: number   // 駒の現在位置
+  name: string        // 名前
+  url_img_car: string     // 車の画像のURL
+  url_img_person: string  // 人の画像のURL
 }
 
 
@@ -18,13 +27,17 @@ export interface elemMoveRecord{
   providedIn: 'root'
 })
 export class RecordService {
-  // コンフィグレーションのキー
+  // レコードデータのキー
   private readonly key = 'record';
 
-  // コンフィグレーションを格納するデータ(初期値)
+  // レコードデータを格納するデータ(初期値)
   private data: recordData = {
     moverecord: [], 
-    latest_square_id: 1
+    status: [
+      {piece_id: 1, square_id: 1, name: "No.1", url_img_car:"", url_img_person:""},
+      {piece_id: 2, square_id: 2, name: "No.2", url_img_car:"", url_img_person:""},
+      {piece_id: 3, square_id: 3, name: "No.3", url_img_car:"", url_img_person:""},
+    ]
   };
 
 
@@ -33,14 +46,45 @@ export class RecordService {
     this.load();
   }
 
-  // Getter/Setter
-  public getLatestSquareId(){if(this.data.latest_square_id) {return this.data.latest_square_id;}else{ return 1;}}
-  public setLatestSquareId(id: number){this.data.latest_square_id = id; this.save();}
+  // 駒の数を返す
+  public getNumOfPieces(){
+    return this.data.status.length;
+  }
+
+  // すべての駒のステータス情報を取得する
+  public getLatestSquareIdList(): elemPieceStatus[]{
+    return this.data.status;
+  }
+
+
+  // 駒の位置を取得する
+  public getLatestSquareId(piece_id: number){
+    for(let i=0 ; i < this.data.status.length ; i++){
+      if(this.data.status[i].piece_id == piece_id) {
+        return this.data.status[i].square_id;
+      }
+    }
+    // 見つからない場合は、初期位置を返す
+    return 1;
+  }
+
+  // 駒の位置をセットする
+  public setLatestSquareId(piece_id:number, square_id: number)
+  {
+    for(let i=0 ; i < this.data.status.length ; i++){
+      if(this.data.status[i].piece_id == piece_id) {
+        this.data.status[i].square_id = square_id;
+        this.save();
+        return;
+      }
+    }
+  }
 
   /** 移動履歴を追加 */
-  public addMoveRecord(fromid: number, toid: number){
+  public addMoveRecord(piece_id: number, fromid: number, toid: number){
     let nowtime: string = new Date().toISOString()
     let data: elemMoveRecord = {
+      piece_id: piece_id,
       date: nowtime,
       from_id: fromid,
       to_id: toid,

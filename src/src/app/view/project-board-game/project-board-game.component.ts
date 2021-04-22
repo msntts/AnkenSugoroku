@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { BoardDataService } from 'src/app/controller/board-data.service';
 import { DisplayItemLine, ConnectLineType, ConnectPointType } from 'src/app/model/display-item-line.model';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model';
+import { RecordService, elemPieceStatus } from 'src/app/controller/record.service';
 
 @Component({
   selector: 'app-project-board-game',
@@ -21,15 +22,18 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   /** マス情報 */
   public squares: Array<DisplayItemSquare> = new Array<DisplayItemSquare>();
   /** 表示するプロジェクトのID */
-  public projectId = 3;
+  // public projectId = 3;   // ピースの位置は record.serviceに移したため削除
+  public pieces: elemPieceStatus[];
 
   /**
    * コンストラクタ
    * @param boardDataService 盤情報サービス
    */
   constructor(
-    private boardDataService: BoardDataService
+    private boardDataService: BoardDataService,
+    private recordservice: RecordService
   ) {
+    this.pieces = this.recordservice.getLatestSquareIdList();
   }
 
   /**
@@ -126,5 +130,10 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
     }
     this.context.closePath();
     this.context.stroke();
+  }
+
+  // *ngForのTrack用処理関数
+  public trackByItem(index: number, piece: elemPieceStatus): number {
+    return piece.piece_id;
   }
 }

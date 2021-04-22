@@ -9,12 +9,20 @@ import { RecordService } from 'src/app/controller/record.service';
 })
 export class ProjectBoardGamePieceComponent implements OnInit {
 
-  @Input() id: number
+  /** ピースのいるマスのID */
+  @Input() square_id: number
+
+  /** ピースの固有のID */
+  @Input() piece_id: number
 
   /** 位置座標x */
   public x: string = '0px';
+
   /** 位置座標y */
   public y: string = '0px';
+
+  /** 名前 */
+  public name: string = "";
 
   /* フィルタ */
   public filter: string = "";
@@ -33,7 +41,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   private readonly c_offset_y: number = 50;
 
   /**  移動アニメーション 有効/無効 */
-  private readonly moveAnimationEnable = true;
+  private readonly moveAnimationEnable = false;
 
   /** ドラッグ中に移動元を明示する  有効/無効 */
   private readonly showFromMark = true;
@@ -55,12 +63,12 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
   ngOnInit() {
     // 最後のマスの位置を取得
-    this.id = this.recordService.getLatestSquareId();
+    this.square_id = this.recordService.getLatestSquareId(this.piece_id);
   }
 
   OnInit(): void {
     // IDからマス情報を取得する
-    let square = this.boardDataService.findSquare(this.id);
+    let square = this.boardDataService.findSquare(this.square_id);
     if (square == null) {
       square = this.boardDataService.findSquare(1)
     }
@@ -100,6 +108,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     const newX = offsetLeft + x;
     const newY = offsetTop + y;
 
+    console.log(this.square_id)
     // マスにいるかどうか
     // ※マスの中にいるかどうかの判定時、駒の左上座標を用いるとユーザーの操作感と不一致が生じる。
     // (駒の左上がマス内に入っていないと、	「マス内に入っていない」と判定されてしまう)
@@ -108,7 +117,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
     if (square != null) {
       // 現在の状態から移動できるマスかどうか
-      if (this.boardDataService.isMovable(this.id, square.Id)) {
+      if (this.boardDataService.isMovable(this.square_id, square.Id)) {
 
         // ドラッグ中に移動元を表示する場合
         if (this.showFromMark) {
@@ -136,13 +145,13 @@ export class ProjectBoardGamePieceComponent implements OnInit {
         this.y = `${square.Y}px`;
 
         // 移動履歴を記録
-        this.recordService.addMoveRecord(this.id, square.Id);
+        this.recordService.addMoveRecord(this.piece_id, this.square_id, square.Id);
 
         // id更新
-        this.id = square.Id;
+        this.square_id = square.Id;
 
         // 最新のidを更新
-        this.recordService.setLatestSquareId(this.id);
+        this.recordService.setLatestSquareId(this.piece_id, this.square_id);
 
       } else {
         // 移動できない場合
