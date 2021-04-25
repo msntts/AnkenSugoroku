@@ -34,9 +34,9 @@ export class RecordService {
   private data: recordData = {
     moverecord: [], 
     status: [
-      {piece_id: 1, square_id: 1, name: "No.1", url_img_car:"", url_img_person:""},
-      {piece_id: 2, square_id: 2, name: "No.2", url_img_car:"", url_img_person:""},
-      {piece_id: 3, square_id: 3, name: "No.3", url_img_car:"", url_img_person:""},
+      {piece_id: 1, square_id: 1, name: "No.1", url_img_car:"assets/car.png", url_img_person:"assets/person.png"},
+      {piece_id: 2, square_id: 2, name: "No.2", url_img_car:"assets/car2.png", url_img_person:"assets/person2.png"},
+      {piece_id: 3, square_id: 3, name: "No.3", url_img_car:"assets/car3.png", url_img_person:"assets/person3.png"},
     ]
   };
 
@@ -51,9 +51,24 @@ export class RecordService {
     return this.data.status.length;
   }
 
-  // すべての駒のステータス情報を取得する
+  // すべての駒のステータス情報リストを取得する
   public getLatestSquareIdList(): elemPieceStatus[]{
     return this.data.status;
+  }
+
+  /**
+   *  駒のステータスを取得する
+   * @param piece_id ステータスを取得したい駒のID
+   * @returns 取得した駒のステータス
+   */
+  public getPieceStatus(piece_id: number): elemPieceStatus{
+    for(let i=0 ; i < this.data.status.length ; i++){
+      if(this.data.status[i].piece_id == piece_id) {
+        return this.data.status[i];
+      }
+    }
+    // 見つからない場合は、nullを返す
+    return null;
   }
 
 
@@ -118,6 +133,17 @@ export class RecordService {
       console.log("ローカルストレージに レコードはありません。")
       this.save();
     }
+
+    // 暫定的なデータ補正処置 開始
+    for(let i = 0 ; i < this.data.status.length ; i++){
+      if(this.data.status[i].url_img_car === "" ){
+        this.data.status[i].url_img_car = "assets/car.png";
+      }
+      if(this.data.status[i].url_img_person === "" ){
+        this.data.status[i].url_img_person = "assets/person.png";
+      }
+    }
+    // =======================================
     return true;
   }
 

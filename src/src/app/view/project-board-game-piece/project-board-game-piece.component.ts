@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
-import { RecordService } from 'src/app/controller/record.service';
+import { RecordService, elemPieceStatus } from 'src/app/controller/record.service';
 
 @Component({
   selector: 'app-project-board-game-piece',
@@ -33,6 +33,9 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   /* 移動元の表示 */
   public fromMarkOn: boolean = false;
 
+  /** 駒のステータス */
+  public pieceStatus: elemPieceStatus;
+
 
   /** 駒のマス内判定点までのオフセット（左上から） X方向 */
   private readonly c_offset_x: number = 50;
@@ -64,6 +67,9 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   ngOnInit() {
     // 最後のマスの位置を取得
     this.square_id = this.recordService.getLatestSquareId(this.piece_id);
+
+    // ピースのステータス情報を取得する
+    this.pieceStatus = this.recordService.getPieceStatus(this.piece_id);
   }
 
   OnInit(): void {
