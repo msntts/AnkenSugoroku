@@ -1,3 +1,28 @@
+<!-- ツールバー -->
+<mat-toolbar>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <!-- メニューの表示内容-->
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>駒の編集</button>
+        <button mat-menu-item>設定</button>
+    </mat-menu>
+
+    <!-- タイトル表示-->
+    <span>AnkenSugoroku</span>
+    <span class="example-spacer"></span>
+
+    <!-- ショートカットボタン-->
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+
+</mat-toolbar>
+
 <div class="main-content">
     <div *ngFor="let square of squares">
         <app-project-board-game-square [square]="square"></app-project-board-game-square>
@@ -6,7 +31,8 @@
 
 
     <ng-container *ngFor="let piece of pieces; index as i; trackBy trackByItem">
-        <app-project-board-game-piece [piece_id]="piece.piece_id" [square_id]="piece.square_id"></app-project-board-game-piece>
+        <app-project-board-game-piece [piece_id]="piece.piece_id" [square_id]="piece.square_id">
+        </app-project-board-game-piece>
     </ng-container>
 
 </div>

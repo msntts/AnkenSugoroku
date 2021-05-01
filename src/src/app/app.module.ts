@@ -10,6 +10,10 @@ import { ProjectBoardGameComponent } from './view/project-board-game/project-boa
 import { ProjectBoardGameSquareComponent } from './view/project-board-game-square/project-board-game-square.component';
 import { ProjectBoardGamePieceComponent } from './view/project-board-game-piece/project-board-game-piece.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     HttpClientModule,
     DragDropModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     BoardDataService
