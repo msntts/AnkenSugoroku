@@ -18,8 +18,8 @@ export interface elemPieceStatus{
   piece_id: number    // 駒のID
   square_id: number   // 駒の現在位置
   name: string        // 名前
-  url_img_car: string     // 車の画像のURL
-  url_img_person: string  // 人の画像のURL
+  url_img_skill: string     // 技術画像のURL
+  url_img_project: string  // 案件画像のURL
 }
 
 
@@ -34,9 +34,9 @@ export class RecordService {
   private data: recordData = {
     moverecord: [], 
     status: [
-      {piece_id: 1, square_id: 1, name: "No.1", url_img_car:"assets/car.png", url_img_person:"assets/person.png"},
-      {piece_id: 2, square_id: 2, name: "No.2", url_img_car:"assets/car2.png", url_img_person:"assets/person2.png"},
-      {piece_id: 3, square_id: 3, name: "No.3", url_img_car:"assets/car3.png", url_img_person:"assets/person3.png"},
+      {piece_id: 1, square_id: 1, name: "No.1", url_img_skill:"assets/car.png", url_img_project:"assets/person.png"},
+      {piece_id: 2, square_id: 2, name: "No.2", url_img_skill:"assets/car2.png", url_img_project:"assets/person2.png"},
+      {piece_id: 3, square_id: 3, name: "No.3", url_img_skill:"assets/car3.png", url_img_project:"assets/person3.png"},
     ]
   };
 
@@ -136,11 +136,11 @@ export class RecordService {
 
     // 暫定的なデータ補正処置 開始
     for(let i = 0 ; i < this.data.status.length ; i++){
-      if(this.data.status[i].url_img_car === "" ){
-        this.data.status[i].url_img_car = "assets/car.png";
+      if(this.data.status[i].url_img_skill === "" ){
+        this.data.status[i].url_img_skill = "assets/car.png";
       }
-      if(this.data.status[i].url_img_person === "" ){
-        this.data.status[i].url_img_person = "assets/person.png";
+      if(this.data.status[i].url_img_project === "" ){
+        this.data.status[i].url_img_project = "assets/person.png";
       }
     }
     // =======================================
