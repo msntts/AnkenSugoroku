@@ -5,8 +5,8 @@
     </button>
     <!-- メニューの表示内容-->
     <mat-menu #menu="matMenu">
-        <button mat-menu-item>駒の編集</button>
-        <button mat-menu-item>設定</button>
+        <button mat-menu-item >駒の編集(未実装)</button>
+        <button mat-menu-item (click)="openSettingAppDialog($event)">設定</button>
     </mat-menu>
 
     <!-- タイトル表示-->

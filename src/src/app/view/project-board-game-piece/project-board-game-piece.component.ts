@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
 import { RecordService, elemPieceStatus } from 'src/app/controller/record.service';
+import { ConfigService} from 'src/app/controller/config.service';
 
 @Component({
   selector: 'app-project-board-game-piece',
@@ -44,7 +45,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   private readonly c_offset_y: number = 50;
 
   /**  移動アニメーション 有効/無効 */
-  private readonly moveAnimationEnable = false;
+  private moveAnimationEnable = false;
 
   /** ドラッグ中に移動元を明示する  有効/無効 */
   private readonly showFromMark = true;
@@ -57,6 +58,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   constructor(
     private boardDataService: BoardDataService,
     private recordService: RecordService,
+    private configservice: ConfigService
   ) {
     this.boardDataService.observable.subscribe(() => {
       this.OnInit()
@@ -65,6 +67,11 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   }
 
   ngOnInit() {
+    // コンフィグレーション読み込み
+    this.configservice.observable.subscribe(() =>{
+      this.moveAnimationEnable = this.configservice.moveAnimationEnable;
+    })
+
     // 最後のマスの位置を取得
     this.square_id = this.recordService.getLatestSquareId(this.piece_id);
 

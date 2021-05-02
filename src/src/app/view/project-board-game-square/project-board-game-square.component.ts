@@ -50,6 +50,11 @@ export class ProjectBoardGameSquareComponent implements OnInit {
     this.content = this.square.Content;
     this.color = this.square.Color;
     this.backgroundColor = this.square.BackgroundColor;
-    this.fontsize = this.configservice.getFontSize().toString() + "px";
+
+    /** configserviceから設定内容を読み込む */
+    this.configservice.observable.subscribe(() => {
+      this.fontsize = this.configservice.fontSize.toString() + "px";
+      this.enableHtml = this.configservice.enableHtml;
+    });
   }
 }

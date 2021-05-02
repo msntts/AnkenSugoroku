@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Subject } from 'rxjs';
 
 // コンフィグデータのインターフェース定義
 export interface configData {
   fontsize: number; // 表示フォントサイズ
+  moveAnimationEnable: boolean,  // 駒移動時のアニメーションを許可
+  enableHtml: boolean   // HTMLタグの表示を許可
 }
 
 @Injectable({
@@ -18,19 +20,36 @@ export class ConfigService {
 
   // コンフィグレーションを格納するデータ(初期値)
   private data: configData = {
-    fontsize: 16
+    fontsize: 16,
+    moveAnimationEnable: true,
+    enableHtml: true 
   };
+
+  /** subject生成 */
+  private subject = new Subject();
 
   constructor() {
     // データ読み込み
     this.load();
   }
 
-  // Getter/Setter
+  /**  ================================= Getter/Setter ================================= */
 
   // フォントサイズ
-  public getFontSize(): number { console.log(this.data.fontsize); return this.data.fontsize; }
-  public setFontSize(fontsize: number) { this.data.fontsize = fontsize; this.save(); }
+  public get fontSize(): number { return this.data.fontsize; }
+  public set fontSize(fontsize: number) { this.data.fontsize = fontsize; this.save(); }
+
+  // moveAnimationEnable
+  public get moveAnimationEnable(): boolean { return this.data.moveAnimationEnable; }
+  public set moveAnimationEnable(val: boolean) { this.data.moveAnimationEnable = val; this.save(); }
+
+  // enableHtml
+  public get enableHtml(): boolean { return this.data.enableHtml; }
+  public set enableHtml(val: boolean) { this.data.enableHtml = val; this.save(); }
+
+  /** observableを取得する */
+  public get observable() {return this.subject.asObservable();}
+
 
   /**
    * localstorageにデータを保存する
@@ -39,6 +58,9 @@ export class ConfigService {
     // 回答レコードをローカルストレージに保存
     let str_json1 = JSON.stringify(this.data);
     this.setItem(this.key, str_json1);
+
+    // 購読先に通知
+    this.subject.next();
     return true;
   }
 
@@ -57,6 +79,11 @@ export class ConfigService {
       console.log("ローカルストレージに コンフィグデータはありません。")
       this.save();
     }
+
+    // 不足データの修正
+    if(this.data.enableHtml==undefined){this.data.enableHtml = true;}
+    if(this.data.moveAnimationEnable==undefined){this.data.moveAnimationEnable = true;}
+    if(this.data.fontsize==undefined){this.data.fontsize=16};
     return true;
   }
 

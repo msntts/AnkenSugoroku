@@ -14,6 +14,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule} from '@angular/material/icon';
+import { MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule} from '@angular/material/dialog';
+
+
+import { SettingAppComponent } from './view/setting-app/setting-app.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,7 @@ import { MatIconModule} from '@angular/material/icon';
     ProjectBoardGameComponent,
     ProjectBoardGameSquareComponent,
     ProjectBoardGamePieceComponent,
+    SettingAppComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,10 @@ import { MatIconModule} from '@angular/material/icon';
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatRadioModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [
     BoardDataService

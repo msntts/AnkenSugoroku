@@ -1,0 +1,24 @@
+<div class="setting-app">
+    <p>駒が移動する際のアニメーション</p>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="moveAnimationEnable">
+        <mat-radio-button [value]="true">有効</mat-radio-button>
+        <mat-radio-button [value]="false">無効</mat-radio-button>
+    </mat-radio-group>
+
+    <p>ボード定義用JSONファイルにおけるHTMLタグの許可</p>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="enableHtml">
+        <mat-radio-button [value]="true">有効</mat-radio-button>
+        <mat-radio-button [value]="false">無効</mat-radio-button>
+    </mat-radio-group>
+
+    <p>フォントサイズ</p>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="fontsize">
+        <mat-radio-button [value]="16">小</mat-radio-button>
+        <mat-radio-button [value]="24">中</mat-radio-button>
+        <mat-radio-button [value]="32">大</mat-radio-button>
+    </mat-radio-group>
+    <mat-dialog-actions>
+        <button [mat-dialog-close]="true" (click)="save($event)">保存</button>&nbsp;
+        <button [mat-dialog-close]="false" (click)="cancel($event)">キャンセル</button>
+    </mat-dialog-actions>
+</div>

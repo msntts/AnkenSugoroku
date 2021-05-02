@@ -3,6 +3,8 @@ import { BoardDataService } from 'src/app/controller/board-data.service';
 import { DisplayItemLine, ConnectLineType, ConnectPointType } from 'src/app/model/display-item-line.model';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model';
 import { RecordService, elemPieceStatus } from 'src/app/controller/record.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SettingAppComponent } from 'src/app/view/setting-app/setting-app.component';
 
 @Component({
   selector: 'app-project-board-game',
@@ -31,7 +33,8 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
    */
   constructor(
     private boardDataService: BoardDataService,
-    private recordservice: RecordService
+    private recordservice: RecordService,
+    private dialog: MatDialog
   ) {
     this.pieces = this.recordservice.getLatestSquareIdList();
   }
@@ -135,5 +138,23 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   // *ngForのTrack用処理関数
   public trackByItem(index: number, piece: elemPieceStatus): number {
     return piece.piece_id;
+  }
+
+  /** メニューから「設定」を選んだ場合の処理 */
+  public openSettingAppDialog(event:any){
+    /** 設定ダイアログを開く */
+    const dialogRef = this.dialog.open(SettingAppComponent);
+
+    /** 設定ダイアログが閉じた後の処理を登録 */
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+
+      if(result){
+        /** 保存ボタンが押された場合(true) */
+        
+      }else{
+        /** キャンセルボタンが押された場合(false) */
+      }
+    });
   }
 }
