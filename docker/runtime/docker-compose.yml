@@ -11,11 +11,8 @@ services:
             - HTTP_PROXY=${HTTP_PROXY}
             - HTTPS_PROXY=${HTTPS_PROXY}
         volumes:
-            - ./src:/src/
-            - ../../src/dist/project-board-game/assets:/assets/
-            # for using docker on WSL2. path must be Absolute path
-            # - C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
-            # - C:\path\to\repo\AnkenSugoroku\src\dist\project-board-game\assets:/assets/
+            - C:\Users\Tetsushi\Documents\Source\AnkenSugoroku\docker\runtime\src:/src/
+            - C:\Users\Tetsushi\Documents\Source\AnkenSugoroku\src\dist\project-board-game\assets:/assets/
         command: ["bash", "startup.sh"]
 
     rproxy:
@@ -24,11 +21,8 @@ services:
         image: nginx:latest
         container_name: reverse_proxy
         volumes: 
-            - reverse_proxy.conf:/etc/nginx/conf.d/reverse_proxy.conf
-            - ../../src/dist/project-board-game:/sugoroku/
-            # for using docker on WSL2. path must be Absolute path
-            # - C:\path\to\repo\AnkenSugoroku\docker\runtime\reverse_proxy.conf:/etc/nginx/conf.d/reverse_proxy.conf
-            # - C:\path\to\repo\AnkenSugoroku\src\dist\project-board-game:/sugoroku/
+            - C:\Users\Tetsushi\Documents\Source\AnkenSugoroku\docker\runtime\reverse_proxy.conf:/etc/nginx/conf.d/reverse_proxy.conf
+            - C:\Users\Tetsushi\Documents\Source\AnkenSugoroku\docker\runtime\nginx.conf:/etc/nginx/nginx.conf
+            - C:\Users\Tetsushi\Documents\Source\AnkenSugoroku\src\dist\project-board-game:/sugoroku/
         ports: 
             - "8080:8080"
-

@@ -1,11 +1,11 @@
  <!-- ドラッグ時に、移動元を表示するマーク-->
  <div *ngIf="fromMarkOn" class="fromMark" [style.left]="x" [style.top]="y" >
-    <img class="car" [src]="pieceStatus.url_img_car" />
-    <img class="person" [src]="pieceStatus.url_img_person" />
+    <img class="car" [src]="pieceStatus.url_img_skill" />
+    <img class="person" [src]="pieceStatus.url_img_project" />
 </div>
 
 <div class="piece" cdkDrag (cdkDragStarted)="onDragStarted($event)" (cdkDragEnded)="onDragEnded($event)" [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity">
-    <img class="car" [src]="pieceStatus.url_img_car" />
-    <img class="person" [src]="pieceStatus.url_img_person" />
+    <img class="car" [src]="pieceStatus.url_img_skill" />
+    <img class="person" [src]="pieceStatus.url_img_project" />
 </div>
 
