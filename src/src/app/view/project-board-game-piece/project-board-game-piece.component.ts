@@ -40,7 +40,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
   /** 駒のマス内判定点までのオフセット（左上から） X方向 */
   private readonly c_offset_x: number = 50;
-  
+
   /** 駒のマス内判定点までのオフセット（左上から） Y方向 */
   private readonly c_offset_y: number = 50;
 
@@ -94,7 +94,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
   /**
    * ドラッグ開始時のイベント
-   * @param event 
+   * @param event
    */
   onDragStarted(event: any) {
 
@@ -110,7 +110,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
   /**
    * ドラッグ完了時のイベント
-   * @param event 
+   * @param event
    */
   async onDragEnded(event: any) {
     // ドラッグしているアイテムの位置情報を取得する
@@ -211,4 +211,10 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     });
   }
 
+  /**
+   * 現在のアクティブピースを通知する
+   */
+  public notifyActivePiece(): void {
+    this.boardDataService.onActivePieceChanged.next(this.piece_id);
+  }
 }

@@ -12,19 +12,24 @@ import { DisplayItemLine } from '../model/display-item-line.model';
     providedIn: 'root',
 })
 export class BoardDataService {
-  
+
     /** 駒が進める方向を両方向にするか、片方向とするかの制御フラグ */
     private readonly moveBidirection: boolean = true;
-  
+
     /** 盤情報モデル */
     private boardDataModel: BoardDataModel = new BoardDataModel();
 
     /** subject生成 */
     private subject = new Subject();
+    private pieceActivationChangedSubject = new Subject<number>();
 
     /** Getter observableを取得する */
     public get observable() {
         return this.subject.asObservable();
+    }
+
+    public get onActivePieceChanged() {
+      return this.pieceActivationChangedSubject;
     }
 
     /**
@@ -103,7 +108,7 @@ export class BoardDataService {
         })
         return result;
     }
-    
+
     /**
      * 全ての線情報を取得する
      * @returns 線情報

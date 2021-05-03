@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoryModel } from 'src/app/model/history.model';
 import { RecordService } from 'src/app/controller/record.service';
+import { BoardDataService } from 'src/app/controller/board-data.service';
 
 @Component({
   selector: 'app-project-board-game-history',
@@ -10,12 +11,15 @@ import { RecordService } from 'src/app/controller/record.service';
 export class ProjectBoardGameHistoryComponent implements OnInit {
 
   constructor(
-    private recordService: RecordService
+    private recordService: RecordService,
+    private boardDataService: BoardDataService
   ) { }
 
   public histories: HistoryModel[];
   public displayColumns = ["Date", "From", "To", "Comment"];
   ngOnInit(): void {
-    this.histories = this.recordService.getPieceHistories();
+    this.boardDataService.onActivePieceChanged.subscribe((piece_id: number)=> {
+      this.histories = this.recordService.getPieceHistories(piece_id);
+    });
   }
 }

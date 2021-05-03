@@ -4,7 +4,7 @@
     <img class="person" [src]="pieceStatus.url_img_project" />
 </div>
 
-<div class="piece" cdkDrag (cdkDragStarted)="onDragStarted($event)" (cdkDragEnded)="onDragEnded($event)" [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity">
+<div class="piece" cdkDrag (cdkDragStarted)="onDragStarted($event)" (cdkDragEnded)="onDragEnded($event)" [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity" (click)="notifyActivePiece()">
     <img class="car" [src]="pieceStatus.url_img_skill" />
     <img class="person" [src]="pieceStatus.url_img_project" />
 </div>

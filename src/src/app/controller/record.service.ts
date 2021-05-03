@@ -33,7 +33,7 @@ export class RecordService {
 
   // レコードデータを格納するデータ(初期値)
   private data: recordData = {
-    moverecord: [], 
+    moverecord: [],
     status: [
       {piece_id: 1, square_id: 1, name: "No.1", url_img_skill:"assets/car.png", url_img_project:"assets/person.png"},
       {piece_id: 2, square_id: 2, name: "No.2", url_img_skill:"assets/car2.png", url_img_project:"assets/person2.png"},
@@ -42,7 +42,7 @@ export class RecordService {
   };
 
 
-  constructor() { 
+  constructor() {
     // データ読み込み
     this.load();
   }
@@ -105,7 +105,7 @@ export class RecordService {
       from_id: fromid,
       to_id: toid,
     }
-    this.data.moverecord.push(data)    
+    this.data.moverecord.push(data)
     this.save();
   }
 
@@ -125,7 +125,7 @@ export class RecordService {
   public load(): boolean {
     // データをローカルストレージから読みだす
     let str_json1 = this.getItem(this.key, "")
-    //console.log(str_json1);  
+    //console.log(str_json1);
 
     // 読みだしたデータをセット
     if (str_json1 != "" && str_json1 != "[]") {
@@ -171,10 +171,12 @@ export class RecordService {
   }
 
 
-  public getPieceHistories(): Array<HistoryModel> {
+  public getPieceHistories(piece_id: number): Array<HistoryModel> {
     let histories = new Array<HistoryModel>();
+
+    // TODO 問い合わせをかける。IDが存在してなかったら空の配列を返す
     // TODO 開発中
-    histories.push(new HistoryModel("1986/03/04", 1, 2, '👶'));
+    histories.push(new HistoryModel("1986/03/04", piece_id, 2, '👶'));
 
     return histories;
   }
