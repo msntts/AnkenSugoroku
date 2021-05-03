@@ -1,8 +1,23 @@
-<mat-list>    
-    <mat-list-item *ngFor="let history of histories">
-        <span>{{history.Date}}</span>
-        <span>{{history.From}}</span>
-        <span>{{history.To}}</span>
-        <span>{{history.Comment}}</span>
-    </mat-list-item>
-</mat-list>
+<table mat-table [dataSource]="histories">
+  <ng-container matColumnDef="Date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let history"> {{history.Date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="From">
+    <th class="cell-common" mat-header-cell *matHeaderCellDef> From </th>
+    <td class="cell-common" mat-cell *matCellDef="let history"> {{history.From}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="To">
+    <th class="cell-common" mat-header-cell *matHeaderCellDef> To </th>
+    <td class="cell-common" mat-cell *matCellDef="let history"> {{history.To}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Comment">
+    <th class="cell-common" mat-header-cell *matHeaderCellDef> Comment </th>
+    <td class="cell-val cell-common" mat-cell *matCellDef="let history"> {{history.Comment}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: displayColumns"></tr>
+</table>

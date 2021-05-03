@@ -21,7 +21,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 
 
 import { SettingAppComponent } from './view/setting-app/setting-app.component';
-import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { MatListModule } from '@angular/material/list';
     MatRadioModule,
     FormsModule,
     MatDialogModule,
-    MatListModule,
+    MatTableModule,
   ],
   providers: [
     BoardDataService

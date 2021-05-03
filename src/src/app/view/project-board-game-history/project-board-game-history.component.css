@@ -1,0 +1,7 @@
+.cell-common {
+  padding-left: 10px;
+}
+
+.cell-text {
+  overflow-wrap: break-word;
+}

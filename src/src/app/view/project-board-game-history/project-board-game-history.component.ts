@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HistoryModel } from 'src/app/model/history.model';
 import { RecordService } from 'src/app/controller/record.service';
 
-
 @Component({
   selector: 'app-project-board-game-history',
   templateUrl: './project-board-game-history.component.html',
@@ -14,8 +13,8 @@ export class ProjectBoardGameHistoryComponent implements OnInit {
     private recordService: RecordService
   ) { }
 
-  public histories: Array<HistoryModel>;
-
+  public histories: HistoryModel[];
+  public displayColumns = ["Date", "From", "To", "Comment"];
   ngOnInit(): void {
     this.histories = this.recordService.getPieceHistories();
   }
