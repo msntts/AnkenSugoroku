@@ -6,7 +6,7 @@ import pathlib
 from .piece_model import PieceModel
 
 class PieceRepository(object):
-    _PIECE_DATA_PATH = '/assets/PieceData.json'
+    _PIECE_DATA_PATH = '/var/ankenSugoroku/PieceData.json'
     _PIECE_TMP_DATA_EXT = '.tmp'
 
     def __new__(cls, *args, **kargs):

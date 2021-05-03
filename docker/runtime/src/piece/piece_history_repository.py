@@ -5,7 +5,7 @@ from json import load, dump
 from .piece_history_model import PieceHistoryModel
 
 class PieceHistoryRepository:
-    _HISTORIES_FILE_PATH = '/var/project_server/histories.json'
+    _HISTORIES_FILE_PATH = '/var/ankenSugoroku/histories.json'
 
     def __init__(this):
         this._histories = {}

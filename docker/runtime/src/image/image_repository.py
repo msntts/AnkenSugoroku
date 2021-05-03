@@ -5,8 +5,8 @@ from werkzeug.utils import secure_filename
 from os import path, chmod, makedirs
 
 class ImageRepository(object):
-    _PROJECT_IMAGE_BASE_PATH = '/assets/project'
-    _SKILL_IMAGE_BASE_PATH = '/assets/skill'
+    _PROJECT_IMAGE_BASE_PATH = '/var/ankenSugoroku/project'
+    _SKILL_IMAGE_BASE_PATH = '/var/ankenSugoroku/skill'
 
 
     def __new__(cls, *args, **kargs):
@@ -27,11 +27,11 @@ class ImageRepository(object):
 
     
     def save_project_img(self, img_stream, filename):
-        return self._save_img(img_stream, '/assets/project', filename)
+        return self._save_img(img_stream, ImageRepository._PROJECT_IMAGE_BASE_PATH, filename)
 
 
     def save_skill_img(self, img_stream, filename):
-        return self._save_img(img_stream, '/assets/skill', filename)
+        return self._save_img(img_stream, ImageRepository._SKILL_IMAGE_BASE_PATH, filename)
 
 
     def _save_img(self, img_stream, dst_dir, filename):

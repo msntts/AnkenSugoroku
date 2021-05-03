@@ -8,17 +8,12 @@ from piece.piece_command import PieceCommand
 from image.image_service import ImageService
 import traceback
 
-app = Flask(__name__)
+app = Flask(__name__,  static_url_path='/')
 
 is_debug = True
 
 piece_service = PieceService()
 image_service = ImageService()
-
-@app.route('/')
-def api_usage():
-    return "API USAGE...under construct"
-
 
 @app.route('/pieces/', methods=['GET'])
 def get_all_pieces_id():
