@@ -1,5 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { HistoryModel } from '../model/history.model'
 
 // レコードデータのインターフェース定義
 export interface recordData {
@@ -169,4 +170,12 @@ export class RecordService {
     localStorage.setItem(key, value);
   }
 
+
+  public getPieceHistories(): Array<HistoryModel> {
+    let histories = new Array<HistoryModel>();
+    // TODO 開発中
+    histories.push(new HistoryModel("1986/03/04", 1, 2, '👶'));
+
+    return histories;
+  }
 }

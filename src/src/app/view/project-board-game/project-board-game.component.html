@@ -23,16 +23,21 @@
 
 </mat-toolbar>
 
-<div class="main-content">
-    <div *ngFor="let square of squares">
-        <app-project-board-game-square [square]="square"></app-project-board-game-square>
+<div class="all-contents">
+	<div class="main-content">
+    	<div *ngFor="let square of squares">
+        	<app-project-board-game-square [square]="square"></app-project-board-game-square>
+    	</div>
+    	<canvas id="canvas1" #canvas1 width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
+
+
+	    <ng-container *ngFor="let piece of pieces; index as i; trackBy trackByItem">
+    	    <app-project-board-game-piece [piece_id]="piece.piece_id" [square_id]="piece.square_id">
+        	</app-project-board-game-piece>
+    	</ng-container>
     </div>
-    <canvas id="canvas1" #canvas1 width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
 
-
-    <ng-container *ngFor="let piece of pieces; index as i; trackBy trackByItem">
-        <app-project-board-game-piece [piece_id]="piece.piece_id" [square_id]="piece.square_id">
-        </app-project-board-game-piece>
-    </ng-container>
-
+    <div class="history-content">
+        <app-project-board-game-history></app-project-board-game-history>
+    </div>
 </div>

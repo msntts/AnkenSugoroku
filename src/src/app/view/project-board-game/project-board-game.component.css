@@ -1,3 +1,11 @@
+.all-contents {
+    display: flex;
+}
+
 .main-content {
+    position: relative;
+}
+
+.history-content {
     position: relative;
 }

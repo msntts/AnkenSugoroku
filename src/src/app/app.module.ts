@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProjectBoardGameComponent } from './view/project-board-game/project-board-game.component';
 import { ProjectBoardGameSquareComponent } from './view/project-board-game-square/project-board-game-square.component';
 import { ProjectBoardGamePieceComponent } from './view/project-board-game-piece/project-board-game-piece.component';
+import { ProjectBoardGameHistoryComponent } from './view/project-board-game-history/project-board-game-history.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +21,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 
 
 import { SettingAppComponent } from './view/setting-app/setting-app.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { SettingAppComponent } from './view/setting-app/setting-app.component';
     ProjectBoardGameSquareComponent,
     ProjectBoardGamePieceComponent,
     SettingAppComponent,
+    ProjectBoardGameHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { SettingAppComponent } from './view/setting-app/setting-app.component';
     MatIconModule,
     MatRadioModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule,
   ],
   providers: [
     BoardDataService
