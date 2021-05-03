@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 class PieceModel:
-    def __init__(self, id, name, url_img_project, url_img_skill):
+    def __init__(self, id, name, url_img_project, url_img_skill, position):
         self._id = id
         self._name = name
         self._url_img_project = url_img_project
         self._url_img_skill = url_img_skill
+        self._position = position
     
 
     def get_id(self):
@@ -22,6 +23,10 @@ class PieceModel:
     
     def get_url_img_skill(self):
         return self._url_img_skill
+
+
+    def get_position(self):
+        return self._position
 
 
     def to_dict(self):

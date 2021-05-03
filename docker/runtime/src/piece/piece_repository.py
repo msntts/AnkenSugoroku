@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import json
-import os
-import pathlib
 from .piece_model import PieceModel
+from .repository_util import load_json, save_json
 
 class PieceRepository(object):
-    _PIECE_DATA_PATH = '/var/ankenSugoroku/PieceData.json'
-    _PIECE_TMP_DATA_EXT = '.tmp'
-
     def __new__(cls, *args, **kargs):
         if not hasattr(cls, "_INSTANCE"):
             cls._INSTANCE = super(PieceRepository, cls).__new__(cls)
@@ -16,19 +11,8 @@ class PieceRepository(object):
 
 
     def __init__(self):
-        try:
-            # テンプファイルがあったらそっちを正とする
-            filename = PieceRepository._PIECE_DATA_PATH
-            tmp_ext = PieceRepository._PIECE_TMP_DATA_EXT
-            if os.path.exists(f'{filename}{tmp_ext}'):
-                # 今あるjsonを消して.tmpで上書き
-                if os.path.exists(filename):
-                    os.remove(filename)
-                os.rename(f'{filename}{tmp_ext}', filename)
-            with open(filename, 'r') as f:
-                self._pieces = json.load(f)
-        except:
-            self._pieces = {}
+        self._PIECE_DATA_FILE = 'PieceData.json'
+        self._pieces = load_json(self._PIECE_DATA_FILE)
 
 
     def get_all_pieces(self):
@@ -52,35 +36,23 @@ class PieceRepository(object):
                     int(id),
                     self._pieces[id]['name'],
                     self._pieces[id]['url_img_project'],
-                    self._pieces[id]['url_img_skill']
+                    self._pieces[id]['url_img_skill'],
+                    int(self._pieces[id]['position'])
                 )
 
 
-    def set_piece(self, id, name, url_img_project, url_img_skill):
+    def set_piece(self, id, name, url_img_project, url_img_skill, position):
         self._pieces[id] = {
             'name': name,
             'url_img_project': url_img_project,
-            'url_img_skill': url_img_skill
+            'url_img_skill': url_img_skill,
+            'position': position
         }
 
-        self._commit()
+        save_json(self._PIECE_DATA_FILE, self._pieces)
 
 
     def remove_piece(self, id):
         del self._pieces[id]
 
-        self._commit()
-
-
-    def _commit(self):
-        # 保存中に何かあってもロールバックするように
-        filename = PieceRepository._PIECE_DATA_PATH
-        tmp_ext = PieceRepository._PIECE_TMP_DATA_EXT
-        if os.path.exists(filename):
-            os.rename(filename, f'{filename}{tmp_ext}')
-
-        with open(filename, 'w') as f:
-            json.dump(self._pieces, f)
-        
-        # 保存成功したようなので.tmpを消す
-        os.remove(f'{filename}{tmp_ext}')
+        save_json(self._PIECE_DATA_FILE, self._pieces)

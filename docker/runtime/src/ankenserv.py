@@ -116,7 +116,7 @@ def upload_skill_image():
         return jsonify({'message': '不正なリクエストです'}), 400
 
 
-@app.route('/skill-images', methods=['GET'])
+@app.route('/skill-images/', methods=['GET'])
 def get_skill_images_path():
     return jsonify({'images': image_service.get_skill_images_path()}), 200
 

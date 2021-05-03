@@ -4,4 +4,5 @@ from .piece_repository import  *
 from .piece_service import *
 from .piece_history_model import *
 from .piece_history_repository import *
+from .repository_util import *
 from const import *
