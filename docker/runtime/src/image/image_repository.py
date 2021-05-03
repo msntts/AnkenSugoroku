@@ -3,12 +3,9 @@
 import glob
 from werkzeug.utils import secure_filename
 from os import path, chmod, makedirs
+from const import VARIABLE_STORE_DIR
 
 class ImageRepository(object):
-    _PROJECT_IMAGE_BASE_PATH = '/var/ankenSugoroku/project'
-    _SKILL_IMAGE_BASE_PATH = '/var/ankenSugoroku/skill'
-
-
     def __new__(cls, *args, **kargs):
         if not hasattr(cls, "_INSTANCE"):
             cls._INSTANCE = super(ImageRepository, cls).__new__(cls)
@@ -16,22 +13,24 @@ class ImageRepository(object):
 
 
     def __init__(self):
+        self._PROJECT_IMAGE_BASE_PATH = path.join(VARIABLE_STORE_DIR, 'project')
+        self._SKILL_IMAGE_BASE_PATH = path.join(VARIABLE_STORE_DIR,'skill')
         self._project_images = []
         self._skill_images = []
         self._rehash()
 
 
     def _rehash(self):
-        self._project_images = glob.glob(path.join(ImageRepository._PROJECT_IMAGE_BASE_PATH, '*'))
-        self._skill_images = glob.glob(path.join(ImageRepository._SKILL_IMAGE_BASE_PATH, '*'))
+        self._project_images = glob.glob(path.join(self._PROJECT_IMAGE_BASE_PATH, '*'))
+        self._skill_images = glob.glob(path.join(self._SKILL_IMAGE_BASE_PATH, '*'))
 
     
     def save_project_img(self, img_stream, filename):
-        return self._save_img(img_stream, ImageRepository._PROJECT_IMAGE_BASE_PATH, filename)
+        return self._save_img(img_stream, self._PROJECT_IMAGE_BASE_PATH, filename)
 
 
     def save_skill_img(self, img_stream, filename):
-        return self._save_img(img_stream, ImageRepository._SKILL_IMAGE_BASE_PATH, filename)
+        return self._save_img(img_stream, self._SKILL_IMAGE_BASE_PATH, filename)
 
 
     def _save_img(self, img_stream, dst_dir, filename):
