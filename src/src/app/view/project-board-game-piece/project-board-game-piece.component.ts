@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
-import { RecordService, elemPieceStatus } from 'src/app/controller/record.service';
+import { PieceDataService, elemPieceStatus } from 'src/app/controller/piece-data.service';
 import { ConfigService} from 'src/app/controller/config.service';
 
 @Component({
@@ -57,7 +57,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
    */
   constructor(
     private boardDataService: BoardDataService,
-    private recordService: RecordService,
+    private pieceDataService: PieceDataService,
     private configservice: ConfigService
   ) {
     this.boardDataService.observable.subscribe(() => {
@@ -73,10 +73,10 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     })
 
     // 最後のマスの位置を取得
-    this.square_id = this.recordService.getLatestSquareId(this.piece_id);
+    this.square_id = this.pieceDataService.getLatestSquareId(this.piece_id);
 
     // ピースのステータス情報を取得する
-    this.pieceStatus = this.recordService.getPieceStatus(this.piece_id);
+    this.pieceStatus = this.pieceDataService.getPieceStatus(this.piece_id);
   }
 
   OnInit(): void {
@@ -158,13 +158,13 @@ export class ProjectBoardGamePieceComponent implements OnInit {
         this.y = `${square.Y}px`;
 
         // 移動履歴を記録
-        this.recordService.addMoveRecord(this.piece_id, this.square_id, square.Id);
+        this.pieceDataService.addMoveRecord(this.piece_id, this.square_id, square.Id);
 
         // id更新
         this.square_id = square.Id;
 
         // 最新のidを更新
-        this.recordService.setLatestSquareId(this.piece_id, this.square_id);
+        this.pieceDataService.setLatestSquareId(this.piece_id, this.square_id);
 
       } else {
         // 移動できない場合

@@ -27,7 +27,7 @@ export interface elemPieceStatus{
 @Injectable({
   providedIn: 'root'
 })
-export class RecordService {
+export class PieceDataService {
   // レコードデータのキー
   private readonly key = 'record';
 

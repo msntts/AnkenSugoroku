@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { BoardDataService } from 'src/app/controller/board-data.service';
 import { DisplayItemLine, ConnectLineType, ConnectPointType } from 'src/app/model/display-item-line.model';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model';
-import { RecordService, elemPieceStatus } from 'src/app/controller/record.service';
+import { PieceDataService, elemPieceStatus } from 'src/app/controller/piece-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SettingAppComponent } from 'src/app/view/setting-app/setting-app.component';
 
@@ -33,10 +33,10 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
    */
   constructor(
     private boardDataService: BoardDataService,
-    private recordservice: RecordService,
+    private pieceDataservice: PieceDataService,
     private dialog: MatDialog
   ) {
-    this.pieces = this.recordservice.getLatestSquareIdList();
+    this.pieces = this.pieceDataservice.getLatestSquareIdList();
   }
 
   /**
@@ -151,7 +151,7 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
 
       if(result){
         /** 保存ボタンが押された場合(true) */
-        
+
       }else{
         /** キャンセルボタンが押された場合(false) */
       }
