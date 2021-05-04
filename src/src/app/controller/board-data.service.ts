@@ -21,15 +21,10 @@ export class BoardDataService {
 
     /** subject生成 */
     private subject = new Subject();
-    private pieceActivationChangedSubject = new Subject<number>();
 
     /** Getter observableを取得する */
     public get observable() {
         return this.subject.asObservable();
-    }
-
-    public get onActivePieceChanged() {
-      return this.pieceActivationChangedSubject;
     }
 
     /**

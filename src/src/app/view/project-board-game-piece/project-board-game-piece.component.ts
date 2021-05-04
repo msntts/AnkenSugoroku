@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
-import { PieceDataService, elemPieceStatus } from 'src/app/controller/piece-data.service';
+import { PieceDataService } from 'src/app/controller/piece-data.service';
 import { ConfigService} from 'src/app/controller/config.service';
-
+import { PieceDataModel } from 'src/app/model/piece-data.model'
 @Component({
   selector: 'app-project-board-game-piece',
   templateUrl: './project-board-game-piece.component.html',
@@ -35,7 +35,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   public fromMarkOn: boolean = false;
 
   /** 駒のステータス */
-  public pieceStatus: elemPieceStatus;
+  public pieceStatus: PieceDataModel;
 
 
   /** 駒のマス内判定点までのオフセット（左上から） X方向 */
@@ -157,14 +157,15 @@ export class ProjectBoardGamePieceComponent implements OnInit {
         this.x = `${square.X}px`;
         this.y = `${square.Y}px`;
 
-        // 移動履歴を記録
-        this.pieceDataService.addMoveRecord(this.piece_id, this.square_id, square.Id);
+        if(this.pieceDataService.updatePiecePosition(this.piece_id, this.square_id, square.Id)){
+          // id更新
+          this.square_id = square.Id;
+        }
+        else {
+          // エラー処理…ロールバックとかする?
+        }
 
-        // id更新
-        this.square_id = square.Id;
 
-        // 最新のidを更新
-        this.pieceDataService.setLatestSquareId(this.piece_id, this.square_id);
 
       } else {
         // 移動できない場合
@@ -215,6 +216,6 @@ export class ProjectBoardGamePieceComponent implements OnInit {
    * 現在のアクティブピースを通知する
    */
   public notifyActivePiece(): void {
-    this.boardDataService.onActivePieceChanged.next(this.piece_id);
+      this.pieceDataService.notifyPieceActivationChanged(this.piece_id);
   }
 }

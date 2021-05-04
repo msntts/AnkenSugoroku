@@ -2,9 +2,10 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { BoardDataService } from 'src/app/controller/board-data.service';
 import { DisplayItemLine, ConnectLineType, ConnectPointType } from 'src/app/model/display-item-line.model';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model';
-import { PieceDataService, elemPieceStatus } from 'src/app/controller/piece-data.service';
+import { PieceDataService } from 'src/app/controller/piece-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SettingAppComponent } from 'src/app/view/setting-app/setting-app.component';
+import { PieceDataModel } from 'src/app/model/piece-data.model'
 
 @Component({
   selector: 'app-project-board-game',
@@ -25,7 +26,7 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   public squares: Array<DisplayItemSquare> = new Array<DisplayItemSquare>();
   /** 表示するプロジェクトのID */
   // public projectId = 3;   // ピースの位置は record.serviceに移したため削除
-  public pieces: elemPieceStatus[];
+  public pieces: Array<PieceDataModel> = new Array<PieceDataModel>();
 
   /**
    * コンストラクタ
@@ -35,14 +36,16 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
     private boardDataService: BoardDataService,
     private pieceDataservice: PieceDataService,
     private dialog: MatDialog
-  ) {
-    this.pieces = this.pieceDataservice.getLatestSquareIdList();
-  }
+  ) {}
 
   /**
    * 初期化処理
    */
   ngOnInit() {
+    this.pieceDataservice.updatePieces();
+    this.pieceDataservice.piecesUpdated$.subscribe(()=> {
+      this.pieces = this.pieceDataservice.getLatestSquareIdList();
+    })
     // サービスから取得したデータをモデルにセットする
     this.boardDataService.fetchData();
     // 読み込み待ち
@@ -136,8 +139,8 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   }
 
   // *ngForのTrack用処理関数
-  public trackByItem(index: number, piece: elemPieceStatus): number {
-    return piece.piece_id;
+  public trackByItem(index: number, piece: PieceDataModel): number {
+    return piece.PieceId;
   }
 
   /** メニューから「設定」を選んだ場合の処理 */
