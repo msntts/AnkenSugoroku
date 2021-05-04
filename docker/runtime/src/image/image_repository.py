@@ -50,9 +50,29 @@ class ImageRepository(object):
         return file_path
 
 
-    def get_project_images_path(self):
-        return self._project_images
+    def get_project_images_name(self):
+        names = []
+
+        for img_path in self._project_images:
+            names.append(path.basename(img_path))
+
+        return names
+
+
+    def get_project_image(self, img_name):
+        with open(path.join(self._PROJECT_IMAGE_BASE_PATH, img_name), 'rb') as f:
+            return f.read()
 
     
-    def get_skill_images_path(self):
-        return self._skill_images
+    def get_skill_images_name(self):
+        names = []
+
+        for img_path in self._skill_images:
+            names.append(path.basename(img_path))
+            
+        return names
+
+
+    def get_skill_image(self, img_name):
+        with open(path.join(self._SKILL_IMAGE_BASE_PATH, img_name), 'rb') as f:
+            return f.read()

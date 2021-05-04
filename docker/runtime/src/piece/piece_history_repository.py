@@ -15,7 +15,7 @@ class PieceHistoryRepository:
         self._histories = load_json(self._HISTORIES_DATA_FILE)
 
 
-    def get_piece_histories(piece_id):
+    def get_piece_histories(self, piece_id):
         try:
             histories = []
             for histories in self._histories[piece_id]:
@@ -30,7 +30,7 @@ class PieceHistoryRepository:
 
             return histories
         except:
-            return []
+            return None
 
 
     def set_piece_history(self, piece_id, history_id, date, move_from, move_to, comment):
@@ -48,3 +48,16 @@ class PieceHistoryRepository:
         }
 
         save_json(self._HISTORIES_DATA_FILE, self._histories)
+
+
+    def remove_all_piece_histories(self, piece_id):
+        del _self._histories[piece_id]
+
+        save_json(self._HISTORIES_DATA_FILE, self._histories)
+
+
+    def remove_piece_history(self, piece_id, history_id):
+        del self._histories[piece_id][history_id]
+
+        save_json(self._HISTORIES_DATA_FILE, self._histories)
+

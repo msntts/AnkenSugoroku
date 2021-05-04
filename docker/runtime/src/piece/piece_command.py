@@ -5,16 +5,16 @@ class PieceCommand:
         if json_payload is None:
             raise ValueError('Payloadが空です。')
         else:
-            err_msg = ''
+            err_msgs = []
             if not 'name' in json_payload:
-                err_msg += 'nameキーは必須です。'
+                err_msgs.append('nameキーは必須です。')
             if not 'url_img_skill' in json_payload:
-                err_msg += 'url_img_skillキーは必須です。'
+                err_msgs.append('url_img_skillキーは必須です。')
             if not 'url_img_project' in json_payload:
-                err_msg += 'url_img_projectキーは必須です。'
+                err_msgs.append('url_img_projectキーは必須です。')
             
-            if err_msg:
-                raise ValueError(err_msg)
+            if len(err_msgs) > 0:
+                raise ValueError(err_msgs)
 
         self._name = json_payload['name']
         self._url_img_project = json_payload['url_img_project']

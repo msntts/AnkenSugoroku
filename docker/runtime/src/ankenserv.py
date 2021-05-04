@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, request, Markup, abort, jsonify
+from flask import Flask, request, Markup, abort, jsonify, redirect, make_response
 from os import path, makedirs, chmod
 from piece.piece_service import PieceService
 from piece.piece_model import PieceModel
 from piece.piece_command import PieceCommand
+from piece.piece_position_command import PiecePositionCommand
+from piece.piece_history_comment_command import PieceHistoryCommentCommand
 from image.image_service import ImageService
 import traceback
 
@@ -14,6 +16,12 @@ is_debug = True
 
 piece_service = PieceService()
 image_service = ImageService()
+
+
+@app.route('/', methods=['GET'])
+def redirect_index():
+    return redirect(f'{request.url_root}index.html')
+
 
 @app.route('/pieces/', methods=['GET'])
 def get_all_pieces_id():
@@ -38,47 +46,57 @@ def create_piece():
             'payload': payload}), 400
 
 
-@app.route('/pieces/<string:piece_id>', methods=['PUT'])
+@app.route('/pieces/<int:piece_id>', methods=['PUT'])
 def update_piece(piece_id):
-    if piece_service.is_piece_exist(piece_id):
-        payload = request.get_json(force=True)
-        try:
-            updated_piece = piece_service.update_piece(
-                piece_id, PieceCommand(payload))
+    payload = request.get_json(force=True)
 
-            return jsonify(updated_piece.to_dict()), 200 
-        except ValueError as ve:
-            return jsonify({
+    try:
+        updated_piece = piece_service.update_piece(
+            piece_id, PieceCommand(payload))
+
+        return jsonify(updated_piece.to_dict()), 200 
+    except ValueError as ve:
+        return jsonify({
             'message': f'{ve.args[0]}',
             'payload': payload}), 400
-    else:
-        return jsonify({
-            'message': '存在しないpiece_idです。',
-            'piece_id': piece_id}), 400
-    
-    return 200
 
 
-@app.route('/pieces/<string:piece_id>', methods=['GET'])
+@app.route('/pieces/<int:piece_id>', methods=['GET'])
 def get_piece(piece_id):
-    if piece_service.is_piece_exist(piece_id):
+    try:
         piece = piece_service.get_piece(piece_id)
         return jsonify(piece.to_dict()), 200
-    else:
+    except ValueError as ve:
         return jsonify({
-            'message': f'存在しないpiece_idです',
-            'requested': piece_id}), 400
+            'message': f'{ve.args[0]}',
+            'payload': payload}), 400
 
 
-@app.route('/pieces/<string:piece_id>', methods=['DELETE'])
+@app.route('/pieces/<int:piece_id>', methods=['DELETE'])
 def remove_piece(piece_id):
-    if piece_service.is_piece_exist(piece_id):
+    try:
         piece_service.remove_piece(piece_id)
         return jsonify({'message': f'piece_id {piece_id} is deleted.'}), 200
-    else:
+    except ValueError as ve:
         return jsonify({
-            'message': f'存在しないpiece_idです',
-            'requested': piece_id}), 400
+            'message': f'{ve.args[0]}',
+            'payload': payload}), 400
+
+
+@app.route('/pieces/<int:piece_id>/position', methods=['PUT'])
+def update_piece_position(piece_id):
+    payload = request.get_json(force=True)
+
+    try:
+        piece_service.update_piece_position(
+            piece_id,
+            PiecePositionCommand(payload))
+        
+        return jsonify(piece_service.get_piece(piece_id).to_dict), 200
+    except ValueError as ve:
+        return jsonify({
+            'message': f'{ve.args[0]}',
+            'payload': payload}), 400
 
 
 @app.route('/project-image', methods=['POST'])
@@ -98,7 +116,24 @@ def upload_project_image():
 
 @app.route('/project-images/', methods=['GET'])
 def get_project_images_path():
-    return jsonify({'images': image_service.get_project_images_path()}), 200
+    return jsonify(image_service.get_project_images_name()), 200
+
+
+@app.route('/project-images/<img_name>', methods=['GET'])
+def get_project_image(img_name):
+    try:
+        raw_img = image_service.get_project_image(img_name)
+        response = make_response(raw_img)
+
+        ext = path.splitext(img_name)[1]
+        if ext == '.png':
+            response.headers.set('Content-Type', 'image/png')
+        else:
+            response.headers.set('Content-Type', 'image/jpeg')
+
+        return response
+    except:
+        return jsonify(f'{img_name}が見つかりませんでした'), 404
 
 
 @app.route('/skill-image', methods=['POST'])
@@ -118,25 +153,71 @@ def upload_skill_image():
 
 @app.route('/skill-images/', methods=['GET'])
 def get_skill_images_path():
-    return jsonify({'images': image_service.get_skill_images_path()}), 200
+    return jsonify(image_service.get_skill_images_name()), 200
 
 
-@app.route('/history', methods=['GET'])
-def get_history():
-    id = request.args.get('id', '')
-    if id == '':
-        return "your request is all"
-    else:
-        return f"your request id is {id}"
+@app.route('/skill-images/<img_name>', methods=['GET'])
+def get_skill_image(img_name):
+    try:
+        raw_img = image_service.get_skill_image(img_name)
+        response = make_response(raw_img)
+
+        ext = path.splitext(img_name)[1]
+        if ext == '.png':
+            response.headers.set('Content-Type', 'image/png')
+        else:
+            response.headers.set('Content-Type', 'image/jpeg')
+
+        return response
+    except:
+        return jsonify(f'{img_name}が見つかりませんでした'), 404
 
 
-@app.route('/history', methods=['POST'])
-def post_history():
-    id = request.args.get('id', '')
-    if id == '':
-        return "your request is all"
-    else:
-        return f"your request id is {id}"
+@app.route('/histories/<int:piece_id>', methods=['GET'])
+def get_histories(piece_id):
+    try:
+        histories = []
+
+        for history in piece_service.get_histories(piece_id):
+            histories.append(history.to_dict())
+
+        return jsonify(histories), 200
+    except ValueError as ve:
+        return jsonify({
+            'message': f'{ve.args[0]}',
+            'payload': payload}), 400
+
+
+@app.route('/histories/<int:piece_id>/<int:history_id>', methods=['PUT'])
+def update_piece_history_comment(piece_id, history_id):
+    payload = request.get_json(force=True)
+
+    try:
+        history = piece_service.set_piece_history_comment(
+            piece_id,
+            history_id,
+            PieceHistoryCommentCommand(payload)
+        )
+
+        return jsonify(history_id.to_dict()), 200
+    except ValueError as ve:
+        return jsonify({
+            'message': f'{ve.args[0]}',
+            'payload': payload}), 400
+
+
+@app.route('/histories/<int:piece_id>/<int:history_id>', methods=['DELETE'])
+def remove_piece_history_comment(piece_id, history_id):
+    try:
+        history = piece_service.remove_piece_history_comment(
+            piece_id,
+            history_id)
+
+        return jsonify({'message': f'comment piece_id={piece_id} history_id={history_id} is deleted.'}), 200
+    except ValueError as ve:
+        return jsonify({
+            'message': f'{ve.args[0]}',
+            'payload': payload}), 400
 
 
 @app.errorhandler(Exception)
