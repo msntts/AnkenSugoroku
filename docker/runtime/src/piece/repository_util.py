@@ -39,4 +39,5 @@ def save_json(filename, data):
 
     # ここまで例外なしにきたら成功
     # backupファイルを消す
-    remove(backup_file)
+    if path.exists(backup_file):
+        remove(backup_file)

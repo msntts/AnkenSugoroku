@@ -88,11 +88,11 @@ def update_piece_position(piece_id):
     payload = request.get_json(force=True)
 
     try:
-        piece_service.update_piece_position(
+        piece = piece_service.update_piece_position(
             piece_id,
             PiecePositionCommand(payload))
         
-        return jsonify(piece_service.get_piece(piece_id).to_dict), 200
+        return jsonify(piece.to_dict()), 200
     except ValueError as ve:
         return jsonify({
             'message': f'{ve.args[0]}',

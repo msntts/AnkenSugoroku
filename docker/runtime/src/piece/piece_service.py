@@ -42,7 +42,7 @@ class PieceService():
             command.get_name(),
             command.get_url_img_project(),
             command.get_url_img_skill(),
-            0) # 0=初期ポジション
+            1) # 1=初期ポジション
 
         return self._piece_rep.find_piece_by_id(new_id)
 
@@ -79,11 +79,10 @@ class PieceService():
 
             # 履歴を追加(タイムスタンプはサーバで押す)
             ja = timezone('Asia/Tokyo')
-            datetime.now(tz = ja).strftime('%Y-%m-%dT%H:%M')
             self._piece_hist_rep.set_piece_history(
                 piece.get_id(),
                 self._number_new_piece_history_id(piece.get_id()),
-                date,
+                datetime.now(tz = ja).strftime('%Y-%m-%dT%H:%M'),
                 command.get_from_id(),
                 command.get_to_id(),
                 '')
