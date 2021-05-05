@@ -16,7 +16,7 @@ export class ProjectBoardGameHistoryComponent implements OnInit {
   public histories: HistoryModel[];
   public displayColumns = ["Date", "From", "To", "Comment"];
   ngOnInit(): void {
-    this.pieceDataService.piecePositionChanged$.subscribe((piece_id: number)=> {
+    this.pieceDataService.pieceSelectionChanged$.subscribe((piece_id: number)=> {
       this.histories = this.pieceDataService.getPieceHistories(piece_id);
     });
   }
