@@ -8,9 +8,8 @@
 Issuesに登録してもProjectsに反映される(はず)  
 画面仕様に関しては、[github pages](https://msntts.github.io/AnkenSugoroku/)参照の事
 
-## 設計思想
-DDDを試してみたい。  
-詳しいことはDocumentに追加していく予定。  
+## 仕様
+- [REST API仕様](https://github.com/msntts/AnkenSugoroku/blob/main/docker/runtime/document/api_spec.md)
 
 ## 貢献
 誰でも/何でもwelcomeです。  
