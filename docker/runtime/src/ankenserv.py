@@ -99,7 +99,7 @@ def update_piece_position(piece_id):
             'payload': payload}), 400
 
 
-@app.route('/project-image', methods=['POST'])
+@app.route('/project-images/', methods=['POST'])
 def upload_project_image():
     # 本家サンプル参照 https://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
     if 'project' in request.files:
@@ -136,7 +136,7 @@ def get_project_image(img_name):
         return jsonify(f'{img_name}が見つかりませんでした'), 404
 
 
-@app.route('/skill-image', methods=['POST'])
+@app.route('/skill-images/', methods=['POST'])
 def upload_skill_image():
     # 本家サンプル参照 https://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
     if 'skill' in request.files:

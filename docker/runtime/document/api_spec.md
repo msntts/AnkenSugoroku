@@ -130,7 +130,7 @@ urlパラメータに移動させた駒のpiece_idを入力。
   }
 ```
 
-## POST /project-image
+## POST /project-images/
 ### リクエストパラメータ
 案件画像データをPOSTする。詳細は、テストコード(docker/runtime_testあたり)参照。
 
@@ -164,7 +164,7 @@ urlパラメータに画像名(↑で取得したもの)を入力。
 ### レスポンス
 画像のバイナリデータ。
 
-## POST /skill-image
+## POST /skill-images/
 ### リクエストパラメータ
 技術画像データをPOSTする。詳細は、テストコード(docker/runtime_testあたり)参照。
 
