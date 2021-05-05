@@ -8,7 +8,7 @@ class PieceHistoryCommentCommand:
             if not 'comment' in json_payload:
                 raise ValueError('commentキーは必須です。')
 
-        self._comment = int(json_payload['comment'])
+        self._comment = json_payload['comment']
 
 
     def get_comment(self):

@@ -54,7 +54,7 @@ class ImageService():
     def get_skill_images_name(self):
         images_name = []
         for img_name in self._image_rep.get_skill_images_name():
-            images_name.append(path.join(self.SKILL_IMG_API_BASE_PATH, img_name))
+            images_name.append(path.join(self._SKILL_IMG_API_BASE_PATH, img_name))
 
         return images_name 
 

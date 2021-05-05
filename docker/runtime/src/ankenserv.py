@@ -199,7 +199,7 @@ def update_piece_history_comment(piece_id, history_id):
             PieceHistoryCommentCommand(payload)
         )
 
-        return jsonify(history_id.to_dict()), 200
+        return jsonify(history.to_dict()), 200
     except ValueError as ve:
         return jsonify({
             'message': f'{ve.args[0]}',
