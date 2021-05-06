@@ -89,7 +89,7 @@ export class PieceDataService {
 
   /**
    * 駒が移動されたことを通知するトリガ
-   * @param piece_id 移動した駒
+   * @param pieceId 移動した駒
    * @returns void
    */
   public notifyPieceActivationChanged(pieceId: number) {

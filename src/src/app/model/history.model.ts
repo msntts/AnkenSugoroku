@@ -1,21 +1,35 @@
+/**
+ * 履歴情報をまとめたクラス
+ */
 export class HistoryModel {
-    private history_id: number;
+    /** ID */
+    private historyId: number;
 
+    /** 作成日時 */
     private date: string;
 
-    // スクエアID
+    /** 移動元マスID */
     private from: number;
 
-    // スクエアID
+    /** 移動先マスID */
     private to: number;
 
+    /** コメント */
     private comment: string;
 
-    constructor(history_id: number,
+    /**
+     * コンストラクタ
+     * @param historyId ID
+     * @param date 作成日時
+     * @param from 移動元マスID
+     * @param to 移動先マスID
+     * @param comment コメント
+     */
+    constructor(historyId: number,
         date: string,
         from: number, to: number,
         comment: string) {
-        this.history_id = history_id;
+        this.historyId = historyId;
         this.date = date;
         this.from = from;
         this. to = to;
@@ -23,7 +37,7 @@ export class HistoryModel {
     }
 
     public get HistoryId(): number {
-       return this.history_id;
+       return this.historyId;
     }
 
     public get Date(): string {

@@ -1,24 +1,40 @@
-export class PieceDataModel {
-    private pieceId: number;        // 駒のID
+/**
+ * 駒情報をまとめたクラス
+ */
+ export class PieceDataModel {
+    /** 駒ID */
+    private pieceId: number;
 
-    private position: number;       // 駒の現在位置
+    /** 駒の現在位置 */
+    private position: number;
 
-    private name: string;           // 名前
+    /** 名前 */
+    private name: string;
 
-    private projectImageUrl: string; // 案件画像のURL
+    /** 案件画像のURL */
+    private projectImageUrl: string;
 
-    private skillImageurl: string;  // 技術画像のURL
+    /** 技術画像のURL */
+    private skillImageUrl: string;
 
+    /***
+     * コンストラクタ
+     * @param pieceId 駒ID
+     * @param position 駒の現在位置
+     * @param name 名前
+     * @param projectImageUrl 案件画像のURL
+     * @param skillImageUrl 技術画像のURL
+     */
     constructor(pieceId: number,
       position: number,
       name: string,
       projectImageUrl: string,
-      skillImageUrl: string){
+      skillImageUrl: string) {
         this.pieceId = pieceId;
         this.position = position;
         this.name = name;
         this.projectImageUrl = projectImageUrl;
-        this.skillImageurl = skillImageUrl;
+        this.skillImageUrl = skillImageUrl;
       }
 
       public get PieceId(): number {
@@ -38,6 +54,6 @@ export class PieceDataModel {
       }
 
       public get SkillImageUrl(): string {
-        return this.skillImageurl;
+        return this.skillImageUrl;
       }
 }
