@@ -209,9 +209,7 @@ def remove_piece_history(piece_id, history_id):
 
         return jsonify({'message': f'piece_id={piece_id} history_id={history_id} is deleted.'}), 200
     except ValueError as ve:
-        return jsonify({
-            'message': f'{ve.args[0]}',
-            'payload': payload}), 400
+        return jsonify({'message': f'{ve.args[0]}'}), 400
 
 
 @app.route('/histories/<int:piece_id>/<int:history_id>/comment', methods=['DELETE'])
@@ -223,9 +221,7 @@ def remove_piece_history_comment(piece_id, history_id):
 
         return jsonify({'message': f'comment piece_id={piece_id} history_id={history_id} is deleted.'}), 200
     except ValueError as ve:
-        return jsonify({
-            'message': f'{ve.args[0]}',
-            'payload': payload}), 400
+        return jsonify({'message': f'{ve.args[0]}'}), 400
 
 
 @app.errorhandler(Exception)

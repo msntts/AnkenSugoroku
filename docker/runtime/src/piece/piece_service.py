@@ -149,7 +149,8 @@ class PieceService():
 
 
     def is_piece_histories_exist(self, piece_id):
-        return self.get_histories(piece_id) is not None
+        histories = self.get_histories(piece_id)
+        return histories is not None and len(histories) > 0
 
 
     def get_histories(self, piece_id):
