@@ -26,7 +26,7 @@ class PieceRepository(object):
 
     def find_piece_by_id(self, piece_id):
         key_id = str(piece_id)
-        if self._pieces[key_id] is not None:
+        if key_id in self._pieces:
             return self._to_piece_model(key_id)
         else:
             return None

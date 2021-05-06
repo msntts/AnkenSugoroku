@@ -21,7 +21,7 @@ class PieceService():
 
 
     def is_piece_exist(self, piece_id):
-        return self.get_piece(piece_id) is not None
+        return self._piece_rep.find_piece_by_id(piece_id) is not None
 
 
     def get_all_pieces(self):
@@ -29,7 +29,10 @@ class PieceService():
 
 
     def get_piece(self, piece_id):
-        return self._piece_rep.find_piece_by_id(piece_id)
+        if self.is_piece_exist(piece_id):
+            return self._piece_rep.find_piece_by_id(piece_id)
+        else:
+            self._raise_piece_id_not_found(piece_id)
 
 
     def create_piece(self, command):
@@ -101,7 +104,6 @@ class PieceService():
         # historyのほうはpieceが正しければ削除に成功しても失敗してもOK
         if self.is_piece_histories_exist(piece_id):
             self._piece_hist_rep.remove_all_piece_histories(piece_id)
-
 
 
     def remove_piece_history(self, piece_id, history_id):

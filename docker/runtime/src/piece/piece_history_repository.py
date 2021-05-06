@@ -54,7 +54,7 @@ class PieceHistoryRepository:
 
 
     def remove_all_piece_histories(self, piece_id):
-        del _self._histories[str(piece_id)]
+        del self._histories[str(piece_id)]
 
         save_json(self._HISTORIES_DATA_FILE, self._histories)
 

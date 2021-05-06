@@ -67,9 +67,7 @@ def get_piece(piece_id):
         piece = piece_service.get_piece(piece_id)
         return jsonify(piece.to_dict()), 200
     except ValueError as ve:
-        return jsonify({
-            'message': f'{ve.args[0]}',
-            'payload': payload}), 400
+        return jsonify({'message': f'{ve.args[0]}'}), 400
 
 
 @app.route('/pieces/<int:piece_id>', methods=['DELETE'])
@@ -78,9 +76,7 @@ def remove_piece(piece_id):
         piece_service.remove_piece(piece_id)
         return jsonify({'message': f'piece_id {piece_id} is deleted.'}), 200
     except ValueError as ve:
-        return jsonify({
-            'message': f'{ve.args[0]}',
-            'payload': payload}), 400
+        return jsonify({'message': f'{ve.args[0]}'}), 400
 
 
 @app.route('/pieces/<int:piece_id>/position', methods=['PUT'])
