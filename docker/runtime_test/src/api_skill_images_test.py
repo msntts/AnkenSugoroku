@@ -27,8 +27,7 @@ class SkillImageTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200) # 1
 
         response = requests.get(f'http://{SkillImageTest.HOST}/skill-images/')
-        response.encoding = 'utf-8'
-        self.assertIn('skill-images/skill.jpg', response.json())
+        self.assertIn('skill-images/skill.jpg', response.json()) # 2
 
 
     def test_002_post_invalid_prameter(self):
@@ -44,7 +43,7 @@ class SkillImageTest(unittest.TestCase):
         with open('resource/skill.jpg', 'rb') as f:
             file = {'hoge': f}
             response = requests.post(f'http://{SkillImageTest.HOST}/skill-images/', files = file)
-        self.assertEqual(response.status_code, 400) # 1
+        self.assertEqual(response.status_code, 400, response.json()) # 1
 
 
     def test_003_post_denied_image(self):
@@ -60,7 +59,7 @@ class SkillImageTest(unittest.TestCase):
         with open('resource/bad.txt', 'rb') as f:
             file = {'skill': f}
             response = requests.post(f'http://{SkillImageTest.HOST}/skill-images/', files = file)
-        self.assertEqual(response.status_code, 415) # 1
+        self.assertEqual(response.status_code, 415, response.json()) # 1
 
 
     def test_010_get_skill_images(self):
@@ -76,8 +75,7 @@ class SkillImageTest(unittest.TestCase):
         response = requests.get(f'http://{SkillImageTest.HOST}/skill-images/')
         self.assertEqual(response.status_code, 200) # 1
 
-        response.encoding = 'utf-8'
-        self.assertIn('skill-images/skill.jpg', response.json())
+        self.assertIn('skill-images/skill.jpg', response.json()) # 2
 
 
 if __name__ == '__main__':

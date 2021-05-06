@@ -34,4 +34,4 @@ services:
             - ./src:/src
             # for using docker on WSL2. path must be Absolute path
             #- C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
-            command: ["bash", "startup.sh"]
+        command: ["bash", "startup.sh"]

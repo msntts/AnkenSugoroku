@@ -24,10 +24,9 @@ class ProjectImageTest(unittest.TestCase):
         with open('resource/anken.png', 'rb') as f:
             file = {'project': f}
             response = requests.post(f'http://{ProjectImageTest.HOST}/project-images/', files = file)
-        self.assertEqual(response.status_code, 200) # 1
+        self.assertEqual(response.status_code, 200, response.json()) # 1
 
         response = requests.get(f'http://{ProjectImageTest.HOST}/project-images/')
-        response.encoding = 'utf-8'
         self.assertIn('project-images/anken.png', response.json()) # 2
 
     
@@ -44,7 +43,7 @@ class ProjectImageTest(unittest.TestCase):
         with open('resource/anken.png', 'rb') as f:
             file = {'hoge': f}
             response = requests.post(f'http://{ProjectImageTest.HOST}/project-images/', files = file)
-        self.assertEqual(response.status_code, 400) # 1
+        self.assertEqual(response.status_code, 400, response.json()) # 1
 
 
     def test_003_post_denied_image(self):
@@ -60,7 +59,7 @@ class ProjectImageTest(unittest.TestCase):
         with open('resource/bad.txt', 'rb') as f:
             file = {'project': f}
             response = requests.post(f'http://{ProjectImageTest.HOST}/project-images/', files = file)
-        self.assertEqual(response.status_code, 415) # 1
+        self.assertEqual(response.status_code, 415, response.json()) # 1
 
 
     def test_010_get_project_images(self):
@@ -74,7 +73,6 @@ class ProjectImageTest(unittest.TestCase):
         2. 登録した画像(anken.png)が画面リストに出力されること
         """
         response = requests.get(f'http://{ProjectImageTest.HOST}/project-images/')
-        response.encoding = 'utf-8'
         self.assertIn('project-images/anken.png', response.json())
 
 

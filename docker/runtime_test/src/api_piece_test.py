@@ -63,12 +63,11 @@ class PieceTest(unittest.TestCase):
         # 存在しない画像を指定
         payload = {'name': 'test', 'url_img_project': 'not_exist.png', 'url_img_skill': 'not_exist.png'}
         response = requests.post(f'http://{PieceTest.HOST}/pieces/', data = json.dumps(payload))
-        self.assertEqual(response.status_code, 400) # 1
+        self.assertEqual(response.status_code, 400, response.json()) # 1
 
         # 駒リストにないことも確認
         response = requests.get(f'http://{PieceTest.HOST}/pieces/')
-        response.encoding = 'utf-8'
-        self.assertFalse(PieceTest._util_subset_in_dict_array(response.json(), payload)) # 2
+        self.assertFalse(PieceTest._util_subset_in_dict_array(response.json(), payload), response.json()) # 2
 
 
     def test_002_post_pieces_with_not_enough_parameter(self):
@@ -85,12 +84,11 @@ class PieceTest(unittest.TestCase):
         # nameがない
         payload = {'url_img_project': 'not_exist.png', 'url_img_skill': 'skill.jpg'}
         response = requests.post(f'http://{PieceTest.HOST}/pieces/', data = json.dumps(payload))
-        self.assertEqual(response.status_code, 400) # 1
+        self.assertEqual(response.status_code, 400, response.json()) # 1
 
         # 駒リストにないことも確認
         response = requests.get(f'http://{PieceTest.HOST}/pieces/')
-        response.encoding = 'utf-8'
-        self.assertFalse(PieceTest._util_subset_in_dict_array(response.json(), payload)) # 2
+        self.assertFalse(PieceTest._util_subset_in_dict_array(response.json(), payload), response.json()) # 2
 
 
     def test_003_post_pieces(self):
@@ -107,17 +105,16 @@ class PieceTest(unittest.TestCase):
         """
         payload = {'name': 'test', 'url_img_project': 'anken.png', 'url_img_skill': 'skill.jpg'}
         response = requests.post(f'http://{PieceTest.HOST}/pieces/', data = json.dumps(payload))
-        response.encoding = 'utf-8'
-        self.assertEqual(response.status_code, 201) # 1
+        self.assertEqual(response.status_code, 201, response.json()) # 1
 
         created = response.json()
-        self.assertTrue(PieceTest._util_subset_in_dic(created, payload)) # 2
+        self.assertTrue(PieceTest._util_subset_in_dic(created, payload), response.json()) # 2
        
         self.assertEqual(created['position'], 1) # 3
 
         # 生成した時の表示内容が駒リストに表示されることを確認
         response = requests.get(f'http://{PieceTest.HOST}/pieces/')
-        self.assertIn(created, response.json())
+        self.assertIn(created, response.json(), response.json())
 
         # ここまで来たら成功
         # テストで作った駒を記憶しておく
@@ -137,10 +134,9 @@ class PieceTest(unittest.TestCase):
         piece = PieceTest._util_get_piece()
 
         response = requests.get(f'http://{PieceTest.HOST}/pieces/')
-        self.assertEqual(response.status_code, 200)
-        response.encoding = 'utf-8'
+        self.assertEqual(response.status_code, 200, response.json())
         
-        self.assertIn(piece, response.json()) # 2
+        self.assertIn(piece, response.json(), response.json()) # 2
 
 
     def test_020_put_piece(self):
@@ -158,9 +154,8 @@ class PieceTest(unittest.TestCase):
         piece['name'] = 'updated' # nameを更新
 
         response = requests.put(f'http://{PieceTest.HOST}/pieces/' + str(piece['id']), data = json.dumps(piece))
-        response.encoding = 'utf-8'
 
-        self.assertEqual(response.status_code, 200) # 1
+        self.assertEqual(response.status_code, 200, response.json()) # 1
 
         self.assertDictEqual(piece, response.json()) # 2
 
@@ -189,9 +184,8 @@ class PieceTest(unittest.TestCase):
         """
         piece = PieceTest._util_get_piece()
         response = requests.get(f'http://{PieceTest.HOST}/pieces/' + str(piece['id']))
-        response.encoding = 'utf-8'
 
-        self.assertEqual(response.status_code, 200) # 1
+        self.assertEqual(response.status_code, 200, response.json()) # 1
 
         self.assertDictEqual(piece, response.json()) # 2
 
@@ -230,9 +224,8 @@ class PieceTest(unittest.TestCase):
         piece['position'] = 2 # payloadに合わせて更新
 
         response = requests.put(f'http://{PieceTest.HOST}/pieces/' + str(piece['id']) + '/position', data = json.dumps(payload))
-        response.encoding = 'utf-8'
 
-        self.assertEqual(response.status_code, 200) # 1
+        self.assertEqual(response.status_code, 200, response.json()) # 1
 
         self.assertDictEqual(piece, response.json()) # 2
 
@@ -259,9 +252,8 @@ class PieceTest(unittest.TestCase):
         1. ステータスコードが400であること
         """
         response = requests.delete(f'http://{PieceTest.HOST}/pieces/100')
-        response.encoding = 'utf-8'
 
-        self.assertEqual(response.status_code, 400) # 1
+        self.assertEqual(response.status_code, 400, response.json()) # 1
 
 
     def test_051_delete_pieces_with_id(self):
@@ -280,7 +272,6 @@ class PieceTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200, response.json()) # 1
 
         response = requests.get(f'http://{PieceTest.HOST}/pieces/')
-        response.encoding = 'utf-8'
 
         for lisetd in response.json():
             if lisetd['id'] == piece['id']: # 2
