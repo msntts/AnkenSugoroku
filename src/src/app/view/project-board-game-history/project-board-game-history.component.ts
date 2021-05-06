@@ -15,9 +15,22 @@ export class ProjectBoardGameHistoryComponent implements OnInit {
 
   public histories: HistoryModel[];
   public displayColumns = ["Date", "From", "To", "Comment"];
+
   ngOnInit(): void {
-    this.pieceDataService.pieceSelectionChanged$.subscribe((piece_id: number)=> {
-      this.histories = this.pieceDataService.getPieceHistories(piece_id);
+    // 駒情報が変更されたら、変更された駒情報の履歴を取得する
+    this.pieceDataService.pieceSelectionChanged$.subscribe((pieceId: number)=> {
+      // 一旦履歴情報を削除
+      this.histories = [];
+      // 履歴情報を取得
+      this.pieceDataService.getPieceHistories(pieceId)
+        .then((histories: Array<HistoryModel>) => {
+          histories.forEach((history: HistoryModel) => {
+            this.histories.push(history);
+          });
+        })
+        .catch((error: any) => {
+          // TODO:　エラー処理
+        });
     });
   }
 }

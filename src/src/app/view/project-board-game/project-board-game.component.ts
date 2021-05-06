@@ -24,17 +24,17 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   public canvasHeight: number;
   /** マス情報 */
   public squares: Array<DisplayItemSquare> = new Array<DisplayItemSquare>();
-  /** 表示するプロジェクトのID */
-  // public projectId = 3;   // ピースの位置は record.serviceに移したため削除
+  /** 駒情報 */
   public pieces: Array<PieceDataModel> = new Array<PieceDataModel>();
 
   /**
    * コンストラクタ
    * @param boardDataService 盤情報サービス
+   * @param pieceDataService 駒情報サービス
    */
   constructor(
     private boardDataService: BoardDataService,
-    private pieceDataservice: PieceDataService,
+    private pieceDataService: PieceDataService,
     private dialog: MatDialog
   ) {}
 
@@ -42,10 +42,12 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
    * 初期化処理
    */
   ngOnInit() {
-    this.pieceDataservice.updatePieces();
-    this.pieceDataservice.piecesUpdated$.subscribe(()=> {
-      this.pieces = this.pieceDataservice.getLatestSquareIdList();
-    })
+    // 駒情報のポーリングを実施する
+    this.pieceDataService.startPoling();
+    // 駒情報更新処理
+    this.pieceDataService.piecesUpdated$.subscribe(()=> {
+      this.pieces = this.pieceDataService.getLatestSquareIdList();
+    });
     // サービスから取得したデータをモデルにセットする
     this.boardDataService.fetchData();
     // 読み込み待ち
@@ -152,10 +154,10 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
 
-      if(result){
+      if (result) {
         /** 保存ボタンが押された場合(true) */
 
-      }else{
+      } else {
         /** キャンセルボタンが押された場合(false) */
       }
     });

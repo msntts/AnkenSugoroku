@@ -11,10 +11,10 @@ import { PieceDataModel } from 'src/app/model/piece-data.model'
 export class ProjectBoardGamePieceComponent implements OnInit {
 
   /** ピースのいるマスのID */
-  @Input() square_id: number
+  @Input() squareId: number
 
   /** ピースの固有のID */
-  @Input() piece_id: number
+  @Input() pieceId: number
 
   /** 位置座標x */
   public x: string = '0px';
@@ -73,15 +73,15 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     })
 
     // 最後のマスの位置を取得
-    this.square_id = this.pieceDataService.getLatestSquareId(this.piece_id);
+    this.squareId = this.pieceDataService.getLatestSquareId(this.pieceId);
 
     // ピースのステータス情報を取得する
-    this.pieceStatus = this.pieceDataService.getPieceStatus(this.piece_id);
+    this.pieceStatus = this.pieceDataService.getPieceStatus(this.pieceId);
   }
 
   OnInit(): void {
     // IDからマス情報を取得する
-    let square = this.boardDataService.findSquare(this.square_id);
+    let square = this.boardDataService.findSquare(this.squareId);
     if (square == null) {
       square = this.boardDataService.findSquare(1)
     }
@@ -121,7 +121,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     const newX = offsetLeft + x;
     const newY = offsetTop + y;
 
-    console.log(this.square_id)
+    console.log(this.squareId)
     // マスにいるかどうか
     // ※マスの中にいるかどうかの判定時、駒の左上座標を用いるとユーザーの操作感と不一致が生じる。
     // (駒の左上がマス内に入っていないと、	「マス内に入っていない」と判定されてしまう)
@@ -130,7 +130,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
     if (square != null) {
       // 現在の状態から移動できるマスかどうか
-      if (this.boardDataService.isMovable(this.square_id, square.Id)) {
+      if (this.boardDataService.isMovable(this.squareId, square.Id)) {
 
         // ドラッグ中に移動元を表示する場合
         if (this.showFromMark) {
@@ -157,16 +157,14 @@ export class ProjectBoardGamePieceComponent implements OnInit {
         this.x = `${square.X}px`;
         this.y = `${square.Y}px`;
 
-        if(this.pieceDataService.updatePiecePosition(this.piece_id, this.square_id, square.Id)){
+        try {
+          // 駒情報更新処理
+          await this.pieceDataService.updatePiecePosition(this.pieceId, this.squareId, square.Id);
           // id更新
-          this.square_id = square.Id;
+          this.squareId = square.Id;
+        } catch(error) {
+          // TODO: エラー処理…ロールバックとかする?
         }
-        else {
-          // エラー処理…ロールバックとかする?
-        }
-
-
-
       } else {
         // 移動できない場合
 
@@ -190,10 +188,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
           this.fromMarkOn = false;
           this.opacity = 1.0;
         }
-
       }
-
-
     }
 
     // ドラッグの状態は元に戻す
@@ -216,6 +211,6 @@ export class ProjectBoardGamePieceComponent implements OnInit {
    * 現在のアクティブピースを通知する
    */
   public notifyActivePiece(): void {
-      this.pieceDataService.notifyPieceActivationChanged(this.piece_id);
+      this.pieceDataService.notifyPieceActivationChanged(this.pieceId);
   }
 }
