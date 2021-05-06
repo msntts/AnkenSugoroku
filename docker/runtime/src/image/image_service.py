@@ -27,13 +27,17 @@ class ImageService():
 
 
     def project_img_exist(self, api_filepath):
-        filename = path.basename(api_filepath)
-        return filename in self._image_rep.get_project_images_name()
+        if api_filepath.find(self._PROJECT_IMG_API_BASE_PATH) == 0:
+            filename = path.basename(api_filepath)
+            return filename in self._image_rep.get_project_images_name()
+        else:
+            return False
 
 
     def skill_img_exist(self, api_filepath):
-        filename = path.basename(api_filepath)
-        return filename in self._image_rep.get_skill_images_name()
+        if api_filepath.find(self._SKILL_IMG_API_BASE_PATH) == 0:
+            filename = path.basename(api_filepath)
+            return filename in self._image_rep.get_skill_images_name()
 
     
     def get_project_images_name(self):
