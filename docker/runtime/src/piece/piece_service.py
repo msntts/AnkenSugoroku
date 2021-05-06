@@ -97,13 +97,13 @@ class PieceService():
 
     def remove_piece(self, piece_id):
         if self.is_piece_exist(piece_id):
+            # pieceを先に消すと、historyのpiece_idが引けなくなるので先にhistoryから消す
+            if self.is_piece_histories_exist(piece_id):
+                self._piece_hist_rep.remove_all_piece_histories(piece_id)
+
             self._piece_rep.remove_piece(piece_id)
         else:
             self._raise_piece_id_not_found(piece_id)
-
-        # historyのほうはpieceが正しければ削除に成功しても失敗してもOK
-        if self.is_piece_histories_exist(piece_id):
-            self._piece_hist_rep.remove_all_piece_histories(piece_id)
 
 
     def remove_piece_history(self, piece_id, history_id):
@@ -122,7 +122,7 @@ class PieceService():
             history.get_history_id(),
             history.get_date(),
             history.get_move_from(),
-            history.get_move_to,
+            history.get_move_to(),
             command.get_comment())
 
         return self._get_piece_history(piece_id, history_id)
@@ -153,7 +153,10 @@ class PieceService():
 
 
     def get_histories(self, piece_id):
-        return self._piece_hist_rep.get_piece_histories(piece_id)
+        if self.is_piece_exist(piece_id):
+            return self._piece_hist_rep.get_piece_histories(piece_id)
+        else:
+            self._raise_piece_id_not_found(piece_id)
 
 
     def _validatePieceCommand(self, piece_id, command):

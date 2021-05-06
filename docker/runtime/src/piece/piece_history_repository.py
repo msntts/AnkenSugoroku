@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from .piece_history_model import PieceHistoryModel
 from .repository_util import load_json, save_json
-import sys
+
 class PieceHistoryRepository:
     def __new__(cls, *args, **kargs):
         if not hasattr(cls, "_INSTANCE"):
@@ -16,23 +16,20 @@ class PieceHistoryRepository:
 
 
     def get_piece_histories(self, piece_id):
-        try:
-            histories = []
-            key_piece_id = str(piece_id)
+        histories = []
+        key_piece_id = str(piece_id)
 
-            if key_piece_id in self._histories:
-                for key_history_id in self._histories[key_piece_id]:
-                    histories.append(PieceHistoryModel(
-                        int(key_history_id),
-                        self._histories[key_piece_id][key_history_id]['date'],
-                        int(self._histories[key_piece_id][key_history_id]['move_from']),
-                        int(self._histories[key_piece_id][key_history_id]['move_to']),
-                        self._histories[key_piece_id][key_history_id]['comment']))
+        if key_piece_id in self._histories:
+            for key_history_id in self._histories[key_piece_id]:
+                histories.append(PieceHistoryModel(
+                    int(key_history_id),
+                    self._histories[key_piece_id][key_history_id]['date'],
+                    int(self._histories[key_piece_id][key_history_id]['move_from']),
+                    int(self._histories[key_piece_id][key_history_id]['move_to']),
+                    self._histories[key_piece_id][key_history_id]['comment']))
 
-            return histories
-        except:
-            return None
-
+        return histories
+        
 
     def set_piece_history(self, piece_id, history_id, date, move_from, move_to, comment):
         key_piece_id = str(piece_id)
@@ -40,7 +37,7 @@ class PieceHistoryRepository:
         if not key_piece_id in self._histories:
             self._histories[key_piece_id] = {}
 
-        if key_hst_id in self._histories[key_piece_id]:
+        if not key_hst_id in self._histories[key_piece_id]:
             self._histories[key_piece_id][key_hst_id] = {}
 
         self._histories[key_piece_id][key_hst_id] = {

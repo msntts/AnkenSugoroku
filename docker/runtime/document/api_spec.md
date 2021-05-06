@@ -253,6 +253,18 @@ URLパラメータに履歴を削除したいpiece_idと、更新対象のhistor
 履歴を削除しましたメッセージ。
 ```json
 {
+    "message": "piece_id=1 history_id=1 is deleted."
+}
+```
+
+## DELETE /histories/\<int:piece_id\>/\<int:history_id\>/comment
+### リクエストパラメータ
+URLパラメータに履歴中のコメントを削除したいpiece_idと、更新対象のhistory_idを入力。
+
+### レスポンス
+履歴を削除しましたメッセージ。
+```json
+{
     "message": "comment piece_id=1 history_id=1 is deleted."
 }
 ```

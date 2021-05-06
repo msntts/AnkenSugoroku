@@ -43,12 +43,17 @@ class PieceRepository(object):
 
 
     def set_piece(self, piece_id, name, url_img_project, url_img_skill, position):
-        self._pieces[str(piece_id)] = {
+        piece_data = {
             'name': name,
             'url_img_project': url_img_project,
             'url_img_skill': url_img_skill,
             'position': position
         }
+        key_id = str(piece_id)
+        if key_id not in self._pieces:
+            self._pieces[key_id] = {}
+
+        self._pieces[key_id].update(piece_data)
 
         save_json(self._PIECE_DATA_FILE, self._pieces)
 

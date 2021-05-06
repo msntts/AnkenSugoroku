@@ -231,14 +231,14 @@ class PieceTest(unittest.TestCase):
 
         response = requests.get(f'http://{PieceTest.HOST}/pieces/')
         for listed in response.json():
-            if listed['id'] ==piece['id']: # 3
+            if listed['id'] == piece['id']: # 3
                 self.assertDictEqual(piece, listed)
                 # テスト成功したので駒を更新
                 PieceTest._util_store_piece(piece)
                 return 
 
         # ここに来たときはリストになかった場合
-        self.assertTrue(False)
+        self.fail()
 
 
     def test_050_delete_pieces_with_invalid_id(self):
