@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  /** APIでサンプルデータを返す */
+  isMock: false
 };

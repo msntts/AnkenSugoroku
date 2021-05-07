@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { interval, Subject, Subscription } from 'rxjs';
-import { HistoryModel } from '../model/history.model'
-import { PieceDataModel } from '../model/piece-data.model'
+import { HistoryModel } from '../model/history.model';
+import { PieceDataModel } from '../model/piece-data.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,10 @@ export class PieceDataService {
     this.stopPoling();
 
     // 最初にデータを取得する
-    this.fetchData();
+    //（どうも処理が早すぎるっぽいので、とりあえず1秒後に実施）
+    setTimeout(() => {
+      this.fetchData();
+    }, 1000);
 
     // TODO: 更新周期を決めてください（とりあえず1分にしてます）
     const timer = interval(60000);
@@ -60,24 +64,56 @@ export class PieceDataService {
     // 現在の情報を削除
     this.pieces = [];
 
-    // データ読み込み
-    const subscription = this.http.get('pieces/', {responseType: 'text'})
-    .subscribe(
-      resp => {
-        this.pieces = new Array<PieceDataModel>();
-        for (const piece of JSON.parse(resp)) {
-          this.pieces.push(new PieceDataModel(
-            piece.id,
-            piece.position,
-            piece.name,
-            piece.url_img_project,
-            piece.url_img_skill
-          ));
+    if (environment.isMock) {
+      // 固定のJSONを返す
+      const jsonData = [
+        {
+          "id": 1,
+          "name": "first",
+          "position": 4,
+          "url_img_project": "assets/person.png",
+          "url_img_skill": "assets/car.png"
+        },
+        {
+          "id": 2,
+          "name": "second2",
+          "position": 5,
+          "url_img_project": "assets/person2.png",
+          "url_img_skill": "assets/car2.png"
         }
-        this.piecesUpdatedSubject.next();
-        subscription.unsubscribe();
+      ];
+
+      this.pieces = new Array<PieceDataModel>();
+      for (const piece of jsonData) {
+        this.pieces.push(new PieceDataModel(
+          piece.id,
+          piece.position,
+          piece.name,
+          piece.url_img_project,
+          piece.url_img_skill
+        ));
       }
-    );
+      this.piecesUpdatedSubject.next();
+    } else {
+      // データ読み込み
+      const subscription = this.http.get('pieces/', {responseType: 'text'})
+      .subscribe(
+        resp => {
+          this.pieces = new Array<PieceDataModel>();
+          for (const piece of JSON.parse(resp)) {
+            this.pieces.push(new PieceDataModel(
+              piece.id,
+              piece.position,
+              piece.name,
+              piece.url_img_project,
+              piece.url_img_skill
+            ));
+          }
+          this.piecesUpdatedSubject.next();
+          subscription.unsubscribe();
+        }
+      );
+    }
   }
 
   /**

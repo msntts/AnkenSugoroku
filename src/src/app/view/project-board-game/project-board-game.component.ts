@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, NgZone, ViewChild } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
 import { DisplayItemLine, ConnectLineType, ConnectPointType } from 'src/app/model/display-item-line.model';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model';
@@ -35,7 +35,8 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   constructor(
     private boardDataService: BoardDataService,
     private pieceDataService: PieceDataService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private ngZone: NgZone,
   ) {}
 
   /**
@@ -46,7 +47,9 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
     this.pieceDataService.startPoling();
     // 駒情報更新処理
     this.pieceDataService.piecesUpdated$.subscribe(()=> {
-      this.pieces = this.pieceDataService.getLatestSquareIdList();
+      this.ngZone.run(() => {
+        this.pieces = this.pieceDataService.getLatestSquareIdList();
+      });
     });
     // サービスから取得したデータをモデルにセットする
     this.boardDataService.fetchData();
