@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SettingAppComponent } from 'src/app/view/setting-app/setting-app.component';
 import { PieceDataModel } from 'src/app/model/piece-data.model'
 import { ProjectBoardGameRegisterImageComponent } from 'src/app/view/project-board-game-register-image/project-board-game-register-image.component'
+import { ProjectBoardGameRegisterPieceComponent } from 'src/app/view/project-board-game-register-piece/project-board-game-register-piece.component'
 
 @Component({
   selector: 'app-project-board-game',
@@ -169,23 +170,12 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   }
 
   public openRegisterPieceDialog(){
-
+    // 駒登録ダイアログを開く。呼び出し元は結果を見ない
+    this.dialog.open(ProjectBoardGameRegisterPieceComponent);
   }
 
   public openRegisterImageDialog(){
-    /** 設定ダイアログを開く */
+    // 画像登録ダイアログを開く。呼び出し元は結果を見ない
     const dialogRef = this.dialog.open(ProjectBoardGameRegisterImageComponent);
-
-    /** 設定ダイアログが閉じた後の処理を登録 */
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-
-      if (result) {
-        /** 保存ボタンが押された場合(true) */
-
-      } else {
-        /** キャンセルボタンが押された場合(false) */
-      }
-    });
   }
 }

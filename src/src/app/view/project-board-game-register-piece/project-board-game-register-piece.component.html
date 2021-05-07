@@ -1,1 +1,31 @@
-<p>project-board-game-register-piece works!</p>
+<div>
+  <div style="text-align: center">新しい案件</div>
+  <div class="piece-images-container">
+    <div class="image-container">
+      <img [src]="selectedProjectImgPath"/>
+    </div>
+    <div class="image-container">
+      <img [src]="selectedSkillImgPath"/>
+    </div>
+  </div>
+</div>
+<div class="root-container">
+  <div>案件画像</div>
+  <div class="images-container">
+    <div class="image-container" *ngFor="let imgPath of projectImagesPath">
+      <img [src]="imgPath" (click)="onProjectImgSelected(imgPath)"/>
+    </div>
+  </div>
+</div>
+<div class="root-container">
+  <div>スキル画像</div>
+  <div class="images-container">
+    <div class="image-container" *ngFor="let imgPath of skillImagesPath">
+      <img [src]="imgPath" (click)="onSkillImgSelected(imgPath)"/>
+    </div>
+  </div>
+</div>
+<mat-dialog-actions>
+  <button mat-stroked-button mat-stroked-button [disabled]="isImagesSelected" (click)="register()">登録</button>
+  <button mat-stroked-button mat-stroked-button (click)="close()">閉じる</button>
+</mat-dialog-actions>

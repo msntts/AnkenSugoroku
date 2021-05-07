@@ -11,6 +11,7 @@
 
 .images-container {
   display: flex;
+  flex-wrap: wrap;
   width: 450px;
   height: 250px;
   overflow: auto;
