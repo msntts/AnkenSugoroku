@@ -1,0 +1,29 @@
+.root-container {
+  /* イラストやみを出してみた */
+  padding: 0.2em 0.5em;
+  margin: 2em 0;
+  color: #565656;
+  background: #ffeaea;
+  box-shadow: 0px 0px 0px 10px #ffeaea;
+  border: dashed 2px #ffc3c3;
+  border-radius: 8px;
+}
+
+.images-container {
+  display: flex;
+  width: 450px;
+  height: 250px;
+  overflow: auto;
+}
+
+.image-container {
+  width: 40px;
+  height: 40px;
+}
+
+img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%
+}

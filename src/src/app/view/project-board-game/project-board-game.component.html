@@ -5,7 +5,8 @@
     </button>
     <!-- メニューの表示内容-->
     <mat-menu #menu="matMenu">
-        <button mat-menu-item >駒の編集(未実装)</button>
+        <button mat-menu-item (click)="openRegisterPieceDialog()">駒の登録</button>
+        <button mat-menu-item (click)="openRegisterImageDialog()">画像の登録</button>
         <button mat-menu-item (click)="openSettingAppDialog($event)">設定</button>
     </mat-menu>
 

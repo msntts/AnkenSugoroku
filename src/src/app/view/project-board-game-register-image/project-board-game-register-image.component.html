@@ -1,0 +1,23 @@
+<div class="root-container">
+  <div>案件画像</div>
+  <div class="images-container">
+    <div class="image-container" *ngFor="let imgPath of projectImagesPath">
+      <img [src]="imgPath"/>
+    </div>
+  </div>
+  <form>
+    <input type="file" #prjInput accept="image/png, image/jpeg" (change)="uploadProjectImage(prjInput.files)"/>
+  </form>
+</div>
+<div class="root-container">
+  <div>スキル画像</div>
+  <div class="images-container">
+    <div class="image-container" *ngFor="let imgPath of skillImagesPath">
+      <img [src]="imgPath"/>
+    </div>
+  </div>
+  <form>
+  <input type="file" #skillInput accept="image/png, image/jpeg" (change)="uploadSkillImage(skillInput.files)"/>
+  </form>
+</div>
+<button style="float: right;" mat-stroked-button (click)="close()">とじる</button>

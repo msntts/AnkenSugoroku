@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 // Service
 import { BoardDataService } from './controller/board-data.service';
+import { ImageService } from './controller/image.service';
 // Components
 import { AppComponent } from './app.component';
 import { ProjectBoardGameComponent } from './view/project-board-game/project-board-game.component';
@@ -24,6 +25,8 @@ import { MatInputModule} from '@angular/material/input';
 import { SettingAppComponent } from './view/setting-app/setting-app.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ProjectBoardGameRegisterPieceComponent } from './view/project-board-game-register-piece/project-board-game-register-piece.component';
+import { ProjectBoardGameRegisterImageComponent } from './view/project-board-game-register-image/project-board-game-register-image.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     SettingAppComponent,
     ProjectBoardGameHistoryComponent,
     ProjectBoardGameEditCommentComponent,
+    ProjectBoardGameRegisterPieceComponent,
+    ProjectBoardGameRegisterImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatBadgeModule,
   ],
   providers: [
-    BoardDataService
+    BoardDataService,
+    ImageService,
   ],
   bootstrap: [AppComponent]
 })
