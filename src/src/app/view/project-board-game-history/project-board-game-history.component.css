@@ -5,3 +5,7 @@
 .cell-text {
   overflow-wrap: break-word;
 }
+
+.cell-clickable {
+  cursor : pointer;
+}

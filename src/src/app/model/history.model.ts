@@ -2,7 +2,10 @@
  * 履歴情報をまとめたクラス
  */
 export class HistoryModel {
-    /** ID */
+    /** 駒ID */
+    private pieceId: number;
+
+    /** 履歴ID */
     private historyId: number;
 
     /** 作成日時 */
@@ -19,21 +22,29 @@ export class HistoryModel {
 
     /**
      * コンストラクタ
-     * @param historyId ID
+     * @param pieceId 駒ID
+     * @param historyId 履歴ID
      * @param date 作成日時
      * @param from 移動元マスID
      * @param to 移動先マスID
      * @param comment コメント
      */
-    constructor(historyId: number,
+    constructor(
+        pieceId: number,
+        historyId: number,
         date: string,
         from: number, to: number,
         comment: string) {
+        this.pieceId = pieceId;
         this.historyId = historyId;
         this.date = date;
         this.from = from;
-        this. to = to;
+        this.to = to;
         this.comment = comment;
+    }
+
+    public get PieceId(): number {
+      return this.pieceId;
     }
 
     public get HistoryId(): number {

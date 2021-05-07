@@ -1,23 +1,40 @@
-<table mat-table [dataSource]="histories">
-  <ng-container matColumnDef="Date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let history"> {{history.Date}} </td>
-  </ng-container>
+<div>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
 
-  <ng-container matColumnDef="From">
-    <th class="cell-common" mat-header-cell *matHeaderCellDef> From </th>
-    <td class="cell-common" mat-cell *matCellDef="let history"> {{history.From}} </td>
-  </ng-container>
+  <table mat-table [dataSource]="histories">
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let history"> {{history.Date}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="To">
-    <th class="cell-common" mat-header-cell *matHeaderCellDef> To </th>
-    <td class="cell-common" mat-cell *matCellDef="let history"> {{history.To}} </td>
-  </ng-container>
+    <ng-container matColumnDef="From">
+      <th class="cell-common" mat-header-cell *matHeaderCellDef> From </th>
+      <td class="cell-common" mat-cell *matCellDef="let history"> {{history.From}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Comment">
-    <th class="cell-common" mat-header-cell *matHeaderCellDef> Comment </th>
-    <td class="cell-val cell-common" mat-cell *matCellDef="let history"> {{history.Comment}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: displayColumns"></tr>
-</table>
+    <ng-container matColumnDef="To">
+      <th class="cell-common" mat-header-cell *matHeaderCellDef> To </th>
+      <td class="cell-common" mat-cell *matCellDef="let history"> {{history.To}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Comment">
+      <th class="cell-common" mat-header-cell *matHeaderCellDef> Comment </th>
+      <td class="cell-val cell-common" mat-cell *matCellDef="let history"> {{history.Comment}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="EditComment">
+      <th class="cell-common" mat-header-cell *matHeaderCellDef></th>
+      <td class="cell-val cell-common cell-clickable" mat-cell *matCellDef="let history"
+      (click)="editComment(history.PieceId, history.HistoryId, history.Comment)"> ✏ </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Delete">
+      <th class="cell-common" mat-header-cell *matHeaderCellDef></th>
+      <td class="cell-val cell-common cell-clickable" mat-cell *matCellDef="let history"
+      (click)="removeRow(history.PieceId, history.HistoryId, history.Date)"> × </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: displayColumns"></tr>
+  </table>
+</div>

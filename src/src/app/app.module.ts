@@ -10,6 +10,7 @@ import { ProjectBoardGameComponent } from './view/project-board-game/project-boa
 import { ProjectBoardGameSquareComponent } from './view/project-board-game-square/project-board-game-square.component';
 import { ProjectBoardGamePieceComponent } from './view/project-board-game-piece/project-board-game-piece.component';
 import { ProjectBoardGameHistoryComponent } from './view/project-board-game-history/project-board-game-history.component';
+import { ProjectBoardGameEditCommentComponent } from './view/project-board-game-edit-comment/project-board-game-edit-comment.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,10 +19,11 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog';
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule} from '@angular/material/input';
 import { SettingAppComponent } from './view/setting-app/setting-app.component';
 import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatTableModule } from '@angular/material/table';
     ProjectBoardGamePieceComponent,
     SettingAppComponent,
     ProjectBoardGameHistoryComponent,
+    ProjectBoardGameEditCommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,8 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     MatDialogModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
   ],
   providers: [
     BoardDataService

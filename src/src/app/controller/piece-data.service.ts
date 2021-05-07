@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { interval, Subject, Subscription } from 'rxjs';
+import { interval, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { HistoryModel } from '../model/history.model';
 import { PieceDataModel } from '../model/piece-data.model';
 import { environment } from '../../environments/environment';
+import { ResolveEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -168,13 +169,13 @@ export class PieceDataService {
     if (piece != null) {
       return piece.Position;
     }
- 
+
     // 見つからない場合は、初期位置を返す
     return 1;
   }
 
 
-  /** 
+  /**
    * 駒の位置を更新する
    * @param pieceId ステータスを更新したい駒のID
    * @param fromId 更新元マスのID
@@ -203,8 +204,8 @@ export class PieceDataService {
 
   /**
    * 指定した駒の履歴情報を取得する
-   * @param pieceId 履歴を取得する駒のID 
-   * @returns 
+   * @param pieceId 履歴を取得する駒のID
+   * @returns
    */
   public getPieceHistories(pieceId: number): Promise<Array<HistoryModel>> {
     return new Promise<Array<HistoryModel>>((resolve, reject) => {
@@ -214,17 +215,67 @@ export class PieceDataService {
           const histories = new Array<HistoryModel>();
           for (const history of JSON.parse(hsts)) {
             histories.push(new HistoryModel(
+              pieceId,
               history.history_id,
               history.date,
               history.move_from,
               history.move_to,
               history.comment));
           }
-          resolve(histories);
+          resolve(histories.reverse());
         },
         error => {
           reject(error);
         });
     });
+  }
+
+  /**
+   * 駒の履歴を削除する
+   * @param pieceId 履歴を削除する駒のID
+   * @param historyId 削除する履歴のID
+   * @returns
+   */
+  public deletePieceHistory(pieceId: number, historyId: number): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.http.delete(`histories/${pieceId}/${historyId}`, {responseType: 'text'}).subscribe(
+        message => {
+          resolve(pieceId); // deleteの場合、status codeしか興味ないので基本読み飛ばす
+        },
+        error => {
+          reject(error);
+        }
+      )
+    });
+  }
+
+  /**
+   * 駒の履歴(コメント)を更新する
+   * @param pieceId 履歴を更新する駒のID
+   * @param historyId 更新する履歴のID
+   * @param comment 更新するコメント
+   * @returns
+   */
+  public putHistoryComment(pieceId: number, historyId: number, comment: string): Promise<HistoryModel> {
+    return new Promise<HistoryModel>((resolve, reject) => {
+      const body = {
+        comment: comment
+      };
+      this.http.put(`histories/${pieceId}/${historyId}`, body, {responseType: 'text'}).subscribe(
+        resp => {
+          const hist = JSON.parse(resp);
+          resolve(new HistoryModel(
+            pieceId,
+            hist.history_id,
+            hist.date,
+            hist.move_from,
+            hist.move_to,
+            hist.comment));
+          },
+          error => {
+            reject(error);
+          }
+        )
+      });
   }
 }
