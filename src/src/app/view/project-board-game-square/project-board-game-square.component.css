@@ -25,7 +25,7 @@
 
 .station-content-region {
     display: table-cell;
-    vertical-align: bottom;
+    vertical-align: top;
     height: 100%;
     overflow: hidden;
 }

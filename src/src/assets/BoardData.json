@@ -1,24 +1,24 @@
 {
     "board": {
-        "width": 1000,
-        "height": 1000
+        "width": 1200,
+        "height": 900
     },
     "squares": [
         {
             "id": 1,
             "x": 10,
-            "y": 115,
-            "width": 80,
-            "height": 50,
+            "y": 40,
+            "width": 160,
+            "height": 200,
             "content": "START",
             "color": "white",
             "backgroundColor": "blue"
         },
         {
             "id": 2,
-            "x": 130,
+            "x": 190,
             "y": 40,
-            "width": 100,
+            "width": 160,
             "height": 200,
             "content": "活動内容が決まっていない",
             "color": "black",
@@ -26,9 +26,9 @@
         },
         {
             "id": 3,
-            "x": 280,
+            "x": 370,
             "y": 40,
-            "width": 150,
+            "width": 160,
             "height": 200,
             "content": "工程・アウトプットが合意できている",
             "color": "white",
@@ -36,9 +36,9 @@
         },
         {
             "id": 4,
-            "x": 480,
+            "x": 550,
             "y": 40,
-            "width": 150,
+            "width": 160,
             "height": 200,
             "content": "計画に対して概ね順調に進んでいる",
             "color": "white",
@@ -46,9 +46,9 @@
         },
         {
             "id": 5,
-            "x": 680,
+            "x": 730,
             "y": 40,
-            "width": 150,
+            "width": 160,
             "height": 200,
             "content": "中間生成物などを確認してもらい齟齬なし",
             "color": "white",
@@ -58,7 +58,7 @@
             "id": 6,
             "x": 440,
             "y": 530,
-            "width": 150,
+            "width": 160,
             "height": 200,
             "content": "問題が発生し計画の見直しが必要",
             "color": "white",
@@ -68,7 +68,7 @@
             "id": 7,
             "x": 680,
             "y": 530,
-            "width": 150,
+            "width": 160,
             "height": 200,
             "content": "計画より遅延しているがキャッチアップできると予想",
             "color": "black",
@@ -76,10 +76,10 @@
         },
         {
             "id": 8,
-            "x": 900,
-            "y": 115,
-            "width": 80,
-            "height": 50,
+            "x": 910,
+            "y": 40,
+            "width": 160,
+            "height": 200,
             "content": "GOAL",
             "color": "white",
             "backgroundColor": "blue"

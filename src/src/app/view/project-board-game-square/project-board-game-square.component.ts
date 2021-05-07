@@ -11,6 +11,8 @@ export class ProjectBoardGameSquareComponent implements OnInit {
 
   @Input() square: DisplayItemSquare;
 
+  /** マスID */
+  public id = 0;
   /** 表示位置のx座標 */
   public x = '0px';
   /** 表示位置のy座標 */
@@ -42,6 +44,7 @@ export class ProjectBoardGameSquareComponent implements OnInit {
    * 初期化処理
    */
    ngOnInit() {
+    this.id = this.square.Id;
     this.x = `${this.square.X}px`;
     this.y = `${this.square.Y}px`;
     this.width = `${this.square.Width}px`;

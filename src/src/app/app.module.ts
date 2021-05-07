@@ -23,7 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule} from '@angular/material/input';
 import { SettingAppComponent } from './view/setting-app/setting-app.component';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
+    MatBadgeModule,
   ],
   providers: [
     BoardDataService
