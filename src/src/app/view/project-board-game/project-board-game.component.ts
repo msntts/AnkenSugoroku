@@ -146,7 +146,7 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
 
   // *ngForのTrack用処理関数
   public trackByItem(index: number, piece: PieceDataModel): number {
-    return piece.PieceId;
+    return piece.Position;
   }
 
   /** メニューから「設定」を選んだ場合の処理 */

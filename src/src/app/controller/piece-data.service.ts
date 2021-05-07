@@ -38,7 +38,7 @@ export class PieceDataService {
     }, 1000);
 
     // TODO: 更新周期を決めてください（とりあえず1分にしてます）
-    const timer = interval(60000);
+    const timer = interval(6000);
     this.intervalSubscription = timer.subscribe(() => {
       // タイマー間隔でデータを取得する
       this.fetchData();
