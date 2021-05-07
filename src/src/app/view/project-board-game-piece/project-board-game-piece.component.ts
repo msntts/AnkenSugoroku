@@ -58,32 +58,23 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   constructor(
     private boardDataService: BoardDataService,
     private pieceDataService: PieceDataService,
-    private configservice: ConfigService
+    private configService: ConfigService
   ) {
-    this.boardDataService.observable.subscribe(() => {
-      this.OnInit()
-    }
-    );
   }
 
   ngOnInit() {
     // コンフィグレーション読み込み
-    this.configservice.observable.subscribe(() =>{
-      this.moveAnimationEnable = this.configservice.moveAnimationEnable;
+    this.configService.observable.subscribe(() =>{
+      this.moveAnimationEnable = this.configService.moveAnimationEnable;
     })
-
-    // 最後のマスの位置を取得
-    this.squareId = this.pieceDataService.getLatestSquareId(this.pieceId);
 
     // ピースのステータス情報を取得する
     this.pieceStatus = this.pieceDataService.getPieceStatus(this.pieceId);
-  }
 
-  OnInit(): void {
     // IDからマス情報を取得する
     let square = this.boardDataService.findSquare(this.squareId);
     if (square == null) {
-      square = this.boardDataService.findSquare(1)
+      square = this.boardDataService.findSquare(1);
     }
 
     if (square != null) {
@@ -106,7 +97,6 @@ export class ProjectBoardGamePieceComponent implements OnInit {
       this.opacity = 0.5;
     }
   }
-
 
   /**
    * ドラッグ完了時のイベント

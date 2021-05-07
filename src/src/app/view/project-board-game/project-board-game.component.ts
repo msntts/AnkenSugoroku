@@ -43,14 +43,6 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
    * 初期化処理
    */
   ngOnInit() {
-    // 駒情報のポーリングを実施する
-    this.pieceDataService.startPoling();
-    // 駒情報更新処理
-    this.pieceDataService.piecesUpdated$.subscribe(()=> {
-      this.ngZone.run(() => {
-        this.pieces = this.pieceDataService.getLatestSquareIdList();
-      });
-    });
     // サービスから取得したデータをモデルにセットする
     this.boardDataService.fetchData();
     // 読み込み待ち
@@ -62,6 +54,15 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
       this.squares = this.boardDataService.getSquares();
       // 要素をつなぐ線を描画する
       this.drawConnectors();
+
+      // 駒情報のポーリングを実施する
+      this.pieceDataService.startPoling();
+      // 駒情報更新処理
+      this.pieceDataService.piecesUpdated$.subscribe(()=> {
+        this.ngZone.run(() => {
+          this.pieces = this.pieceDataService.getLatestSquareIdList();
+        });
+      });
     });
   }
 
