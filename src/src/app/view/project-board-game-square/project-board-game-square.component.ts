@@ -38,7 +38,7 @@ export class ProjectBoardGameSquareComponent implements OnInit {
   /**
    * コンストラクタ
    */
-  constructor(private configservice: ConfigService ) {}
+   constructor(private configservice: ConfigService ) {}
 
   /**
    * 初期化処理
@@ -53,6 +53,8 @@ export class ProjectBoardGameSquareComponent implements OnInit {
     this.content = this.square.Content;
     this.color = this.square.Color;
     this.backgroundColor = this.square.BackgroundColor;
+    this.fontsize = `${this.configservice.fontSize}px`;
+    this.enableHtml = this.configservice.enableHtml;
 
     /** configserviceから設定内容を読み込む */
     this.configservice.observable.subscribe(() => {

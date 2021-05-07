@@ -20,9 +20,9 @@ export class ConfigService {
 
   // コンフィグレーションを格納するデータ(初期値)
   private data: configData = {
-    fontsize: 16,
+    fontsize: 12,
     moveAnimationEnable: true,
-    enableHtml: true 
+    enableHtml: true
   };
 
   /** subject生成 */
@@ -70,7 +70,7 @@ export class ConfigService {
   public load(): boolean {
     // データをローカルストレージから読みだす
     let str_json1 = this.getItem(this.key, "")
-    //console.log(str_json1);  
+    //console.log(str_json1);
 
     // 読みだしたデータをセット
     if (str_json1 != "" && str_json1 != "[]") {
@@ -83,7 +83,7 @@ export class ConfigService {
     // 不足データの修正
     if(this.data.enableHtml==undefined){this.data.enableHtml = true;}
     if(this.data.moveAnimationEnable==undefined){this.data.moveAnimationEnable = true;}
-    if(this.data.fontsize==undefined){this.data.fontsize=16};
+    if(this.data.fontsize==undefined){this.data.fontsize=12};
     return true;
   }
 
