@@ -1,20 +1,19 @@
 .piece {
     position: absolute;
+    display: flex;
 }
 .fromMark {
     position: absolute;
 }
-.person {
-    position: absolute;
-    top: 0px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
+
+.img-container {
+  width: 40px;
+  height: 40px;
 }
 
-.car {
-    position: absolute;
-    top: 10px;
-    width: 100px;
-    height: 100px;
+img {
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:100%;
 }
