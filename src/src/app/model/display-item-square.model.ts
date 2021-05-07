@@ -56,18 +56,6 @@ export class DisplayItemSquare extends DisplayItemBase {
     }
 
     /**
-     * 接続情報を追加する
-     * @param targetId 接続先ID
-     * @param sourcePoint 接続元座標種別文字列
-     * @param targetPoint 接続先座標種別文字列
-     * @param connectType 接続線種別文字列
-     */
-/*    public appendConnectInfo(targetId: number, sourcePoint: string, targetPoint: string, connectType: string): void {
-        const connectInfo = new ConnectInfo(targetId, sourcePoint, targetPoint, connectType);
-        this.connectInfo.push(connectInfo);
-    }
-*/
-    /**
      * 接続先の位置情報を取得する
      * @param pointType ポイント種別
      * @returns 位置座標
