@@ -8,7 +8,11 @@
   </div>
 </div>
 
-<div class="piece" cdkDrag (cdkDragStarted)="onDragStarted($event)" (cdkDragEnded)="onDragEnded($event)" [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity" (click)="notifyActivePiece()">
+<div class="piece" cdkDrag [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity"
+  (cdkDragStarted)="onDragStarted($event)"
+  (cdkDragEnded)="onDragEnded($event)"
+  (click)="notifyActivePiece()"
+  (contextmenu)="showMenu($event); $event.preventDefault();">
   <div class="img-container">
     <img [src]="pieceStatus.ProjectImageUrl" />
   </div>
@@ -17,3 +21,9 @@
   </div>
 </div>
 
+<ng-template #pieceContextMenu>
+  <slection class="context-menu">
+    <div class="context-menu-item" (click)="updatePiece()">駒アイコンの変更</div>
+    <div class="context-menu-item" (click)="deletePiece()">駒の削除</div>
+  </slection>
+</ng-template>

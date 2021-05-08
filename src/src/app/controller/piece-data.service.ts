@@ -198,6 +198,44 @@ export class PieceDataService {
     });
   }
 
+  public putPiece(pieceId: number, name: string, projectImgUrl: string, skillImgUrl: string): Promise<PieceDataModel> {
+    return new Promise<PieceDataModel>((resolve, reject) => {
+      const params = {
+        name: name,
+        url_img_project: projectImgUrl,
+        url_img_skill: skillImgUrl
+      };
+      // API発行
+      this.http.put(`pieces/${pieceId}`, params, {responseType: 'text'}).subscribe(
+        resp => {
+          let created = JSON.parse(resp);
+          resolve(new PieceDataModel(
+            created.Id,
+            created.name,
+            created.position,
+            created.url_img_project,
+            created.url_skill_project));
+        },
+        error => {
+          reject(error);
+        });
+    });
+  }
+
+  public deletePiece(pieceId: number): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      // API発行
+      this.http.delete(`pieces/${pieceId}`, {responseType: 'text'}).subscribe(
+        resp => {
+          let response = JSON.parse(resp);
+          resolve(response['message']);
+        },
+        error => {
+          reject(error);
+        });
+    });
+  }
+
   /**
    * 駒の位置を更新する
    * @param pieceId ステータスを更新したい駒のID

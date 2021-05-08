@@ -1,5 +1,5 @@
 <div>
-  <div style="text-align: center">新しい案件</div>
+  <div style="text-align: center">案件×スキルプレビュー</div>
   <div class="piece-images-container">
     <div class="image-container">
       <img [src]="selectedProjectImgPath"/>
@@ -26,6 +26,7 @@
   </div>
 </div>
 <mat-dialog-actions>
-  <button mat-stroked-button mat-stroked-button [disabled]="isImagesSelected" (click)="register()">登録</button>
-  <button mat-stroked-button mat-stroked-button (click)="close()">閉じる</button>
+  <button *ngIf="asUpdate" mat-stroked-button (click)="update()">更新</button>
+  <button *ngIf="!asUpdate" mat-stroked-button [disabled]="isImagesSelected" (click)="register()">登録</button>
+  <button mat-stroked-button (click)="close()">閉じる</button>
 </mat-dialog-actions>

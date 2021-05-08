@@ -147,8 +147,9 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
   }
 
   // *ngForのTrack用処理関数
-  public trackByItem(index: number, piece: PieceDataModel): number {
-    return piece.Position;
+  public trackByItem(index: number, piece: PieceDataModel): string {
+    // trackbyでは1つの要素しか見れなさそうだから、変更を監視したいものを全部文字列化する
+    return `${piece.Position}${piece.ProjectImageUrl}${piece.SkillImageUrl}`;
   }
 
   /** メニューから「設定」を選んだ場合の処理 */
