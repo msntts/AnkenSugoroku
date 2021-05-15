@@ -4,13 +4,12 @@ import { interval, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { HistoryModel } from '../model/history.model';
 import { PieceDataModel } from '../model/piece-data.model';
 import { environment } from '../../environments/environment';
-import { ResolveEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PieceDataService {
-  /** 駒が移動したことを通知する */
+  /** 駒の選択状況が変化したことを通知する */
   private pieceSelectionChangedSubject = new Subject<number>();
 
   /** 駒情報が更新されたことを通知する */
@@ -252,7 +251,8 @@ export class PieceDataService {
       // API発行
       this.http.put(`pieces/${pieceId}/position`, params).subscribe(
         () => {
-          // putが成功したら、戻り値は無視。イベントを発行してデータを更新
+          // putが成功したら、戻り値は無視。
+          // 移動後の履歴がすぐ反映されるようにイベントを発行
           this.pieceSelectionChangedSubject.next(pieceId);
           resolve(pieceId);
         },

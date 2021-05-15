@@ -25,7 +25,7 @@ export class ProjectBoardGameHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
-    // 駒情報が変更されたら、変更された駒情報の履歴を取得する
+    // 駒の選択状況が変更されたら、変更された駒情報の履歴を取得する
     this.pieceDataService.pieceSelectionChanged$.subscribe((pieceId: number)=> {
       // 一旦履歴情報を削除
       this.histories = new MatTableDataSource<HistoryModel>();
