@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule} from '@angular/material/icon';
 import { MatRadioModule} from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -56,6 +57,7 @@ import { ProjectBoardGameRegisterImageComponent } from './view/project-board-gam
     MatPaginatorModule,
     MatInputModule,
     MatBadgeModule,
+    MatTooltipModule,
   ],
   providers: [
     BoardDataService,

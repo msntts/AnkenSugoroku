@@ -2,7 +2,10 @@
   <div>案件画像</div>
   <div class="images-container">
     <div class="image-container" *ngFor="let imgPath of projectImagesPath">
-      <img [src]="imgPath"/>
+      <div class="image-bounds">
+        <img [src]="imgPath"/>
+      </div>
+      <label matTooltip="{{getImageName(imgPath)}}">{{getImageName(imgPath)}}</label>
     </div>
   </div>
   <form>
@@ -13,7 +16,10 @@
   <div>スキル画像</div>
   <div class="images-container">
     <div class="image-container" *ngFor="let imgPath of skillImagesPath">
-      <img [src]="imgPath"/>
+      <div class="image-bounds">
+        <img [src]="imgPath"/>
+      </div>
+      <label matTooltip="{{getImageName(imgPath)}}">{{getImageName(imgPath)}}</label>
     </div>
   </div>
   <form>

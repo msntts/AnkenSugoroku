@@ -30,6 +30,11 @@ export class ProjectBoardGameRegisterImageComponent implements OnInit {
     });
   }
 
+  public getImageName(imgPath: string): string {
+    const splittedPath = imgPath.split('/');
+    return splittedPath[splittedPath.length - 1];
+  }
+
   private getSkillImages() {
     this.imageService.getSkillImagesUrl()
     .then((imgsPath: string[]) => {

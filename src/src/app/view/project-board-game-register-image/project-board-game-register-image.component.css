@@ -18,13 +18,28 @@
 }
 
 .image-container {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 }
 
-img {
+.image-bounds {
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-bounds img {
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 100%
+}
+
+.image-container label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+  text-align: center;
 }
