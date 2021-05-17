@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { interval, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { interval, Subject, Subscription } from 'rxjs';
 import { HistoryModel } from '../model/history.model';
 import { PieceDataModel } from '../model/piece-data.model';
+import { PiecePositionChanged } from '../model/piece-position-changed.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -14,6 +15,9 @@ export class PieceDataService {
 
   /** 駒情報が更新されたことを通知する */
   private piecesUpdatedSubject = new Subject();
+
+  /** 駒の位置が変更されたことを通知する */
+  private piecePositionChangedSubject = new Subject<PiecePositionChanged>();
 
   /** 駒情報 */
   private pieces: Array<PieceDataModel> = new Array<PieceDataModel>();
@@ -124,7 +128,14 @@ export class PieceDataService {
   }
 
   /**
-   * 駒が移動されたことを通知するトリガ
+   * 駒の位置が更新されたことを購読させるための何か
+   */
+  public get piecePositionChanged$() {
+    return this.piecePositionChangedSubject.asObservable();
+  }
+
+  /**
+   * 駒の選択状態が変更されたことを通知するトリガ
    * @param pieceId 移動した駒
    * @returns void
    */
@@ -133,7 +144,7 @@ export class PieceDataService {
   }
 
   /**
-   * 駒が移動したことを購読させるための何か
+   * 駒の選択状態が変更したことを購読させるための何か
    */
    public get pieceSelectionChanged$() {
     return this.pieceSelectionChangedSubject.asObservable();
@@ -254,6 +265,7 @@ export class PieceDataService {
           // putが成功したら、戻り値は無視。
           // 移動後の履歴がすぐ反映されるようにイベントを発行
           this.pieceSelectionChangedSubject.next(pieceId);
+          this.piecePositionChangedSubject.next(new PiecePositionChanged(pieceId, fromId, toId));
           resolve(pieceId);
         },
         error => {

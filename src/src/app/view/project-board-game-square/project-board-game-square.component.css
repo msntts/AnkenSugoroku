@@ -1,36 +1,21 @@
-.station-under-level {
+.square {
     position: absolute;
     border-radius: 10px 10px 10px 10px;
     box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+    height: auto;
 }
 
-.station-over-level {
-    position: relative;
-    height: 85%;
-    width: 85%;
-    top: 5px;
-    border-radius: 10px 10px 10px 10px;
-    margin: auto;
-    display: table;
+.square-title {
+  display: table;
+  text-align: center;
+  position: relative;
+  height: auto;
+  width: 85%;
+  top: 5px;
+  margin: auto;
 }
 
-.station-over-level-border {
-    border: solid 1.5px white;
-}
-
-.content {
-    margin: auto;
-    text-align: center;
-}
-
-.station-content-region {
-    display: table-cell;
-    vertical-align: top;
-    height: 100%;
-    overflow: hidden;
-}
-
-.station-content {
+.square-pieces {
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;

@@ -1,9 +1,5 @@
 .piece {
-    position: absolute;
-    display: flex;
-}
-.fromMark {
-    position: absolute;
+  display: flex;
 }
 
 .img-container {

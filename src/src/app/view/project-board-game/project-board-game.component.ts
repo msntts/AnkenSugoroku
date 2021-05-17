@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, NgZone, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BoardDataService } from 'src/app/controller/board-data.service';
-import { DisplayItemLine, ConnectLineType, ConnectPointType } from 'src/app/model/display-item-line.model';
+import { DisplayItemLine, ConnectLineType } from 'src/app/model/display-item-line.model';
 import { DisplayItemSquare } from 'src/app/model/display-item-square.model';
 import { PieceDataService } from 'src/app/controller/piece-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,7 +38,6 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
     private boardDataService: BoardDataService,
     private pieceDataService: PieceDataService,
     private dialog: MatDialog,
-    private ngZone: NgZone,
   ) {}
 
   /**
@@ -59,12 +58,6 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
 
       // 駒情報のポーリングを実施する
       this.pieceDataService.startPoling();
-      // 駒情報更新処理
-      this.pieceDataService.piecesUpdated$.subscribe(()=> {
-        this.ngZone.run(() => {
-          this.pieces = this.pieceDataService.getLatestSquareIdList();
-        });
-      });
     });
   }
 
@@ -144,12 +137,6 @@ export class ProjectBoardGameComponent implements OnInit, AfterViewInit {
     }
     this.context.closePath();
     this.context.stroke();
-  }
-
-  // *ngForのTrack用処理関数
-  public trackByItem(index: number, piece: PieceDataModel): string {
-    // trackbyでは1つの要素しか見れなさそうだから、変更を監視したいものを全部文字列化する
-    return `${piece.Position}${piece.ProjectImageUrl}${piece.SkillImageUrl}`;
   }
 
   /** メニューから「設定」を選んだ場合の処理 */

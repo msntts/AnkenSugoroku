@@ -16,17 +16,11 @@
 </mat-toolbar>
 
 <div class="contents-container">
-	<div class="sugoroku-content">
+	<div cdkDropListGroup class="sugoroku-content">
     	<div *ngFor="let square of squares">
         	<app-project-board-game-square [square]="square"></app-project-board-game-square>
     	</div>
     	<canvas id="canvas1" #canvas1 width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
-
-
-	    <ng-container *ngFor="let piece of pieces; index as i; trackBy trackByItem">
-    	    <app-project-board-game-piece [pieceId]="piece.PieceId" [squareId]="piece.Position">
-        	</app-project-board-game-piece>
-    	</ng-container>
     </div>
 
     <div class="history-content">

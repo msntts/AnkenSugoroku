@@ -1,10 +1,17 @@
-<div class="station-under-level" [matBadge]="id" matBadgePosition="before" [style.left]="x" [style.top]="y" [style.width]="width" [style.height]="height" [style.z-index]="zIndex" [style.color]="color" [style.background-color]="backgroundColor">
-    <div class="station-over-level">
-        <div class="station-content-region">
-            <div class="station-content">
-                <div *ngIf="!enableHtml" class="content" [style.font-size]="fontsize">{{content}}</div>
-                <div *ngIf="enableHtml"  class="content" [style.font-size]="fontsize" [innerHTML] = "content"></div>
-            </div>
-        </div>
+<div class="square"
+  [matBadge]="id" matBadgePosition="before"
+  [style.left]="x" [style.top]="y" [style.width]="width" [style.min-height]="height"
+  [style.z-index]="zIndex" [style.color]="color" [style.background-color]="backgroundColor"
+  cdkDropList id="square-{{id}}" [cdkDropListData]="pieces" [cdkDropListConnectedTo]="connectedTo" (cdkDropListDropped)="drop($event)">
+  <div class="square-contents">
+    <div class="square-title">
+      <div *ngIf="!enableHtml" class="content" [style.font-size]="fontsize" >{{content}}</div>
+      <div *ngIf="enableHtml"  class="content" [style.font-size]="fontsize" [innerHTML] = "content"></div>
     </div>
+    <div class="square-pieces">
+      <ng-container *ngFor="let piece of pieces; index as i; trackBy trackByItem">
+        <app-project-board-game-piece [pieceId]="piece.PieceId" [squareId]="piece.Position"></app-project-board-game-piece>
+      </ng-container>
+    </div>
+  </div>
 </div>

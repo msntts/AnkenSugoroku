@@ -1,17 +1,5 @@
- <!-- ドラッグ時に、移動元を表示するマーク-->
- <div *ngIf="fromMarkOn" class="fromMark piece" [style.left]="x" [style.top]="y" >
-  <div class="img-container">
-    <img [src]="pieceStatus.ProjectImageUrl" />
-  </div>
-  <div class="img-container">
-    <img [src]="pieceStatus.SkillImageUrl" />
-  </div>
-</div>
-
 <div class="piece" cdkDrag [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity"
-  (cdkDragStarted)="onDragStarted($event)"
-  (cdkDragEnded)="onDragEnded($event)"
-  (click)="notifyActivePiece()"
+(click)="notifyActivePiece()"
   (contextmenu)="showMenu($event); $event.preventDefault();">
   <div class="img-container">
     <img [src]="pieceStatus.ProjectImageUrl" />

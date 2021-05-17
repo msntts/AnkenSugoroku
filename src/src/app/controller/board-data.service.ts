@@ -89,22 +89,6 @@ export class BoardDataService {
     }
 
     /**
-     * 全てのマス情報から指定された位置座標に存在するマス情報を取得する
-     * @param x x座標
-     * @param y y座標
-     * @returns マス情報
-     */
-    public findSquareByPosition(x: number, y: number): DisplayItemSquare {
-        let result = null;
-        this.boardDataModel.Squares.forEach((square: DisplayItemSquare) => {
-            if (square.X <= x && x <= square.X + square.Width && square.Y <= y && y <= square.Y + square.Height) {
-                result = square;
-            }
-        })
-        return result;
-    }
-
-    /**
      * 全ての線情報を取得する
      * @returns 線情報
      */
@@ -113,26 +97,25 @@ export class BoardDataService {
     }
 
     /**
-     * 指定したIDから指定したIDへ遷移できるかどうかを調べる
-     * @param sourceId 遷移元のID
-     * @param targetId 遷移先のID
+     * 指定したIDが接続しているマスIDを取得する
+     * @param squareId 対象のID
      */
-    public isMovable(sourceId: number, targetId: number): boolean {
-        let isMovable = false;
-        this.boardDataModel.Lines.forEach(line => {
-            // 順方向
-            if (Number(line.sourceId) === sourceId && Number(line.targetId) === targetId) {
-                isMovable = true;
-            }
-            // 両方向への移動が可能な設定の場合は、逆方向も検索する
-            if(this.moveBidirection){
-                // 逆方向
-                if (Number(line.sourceId) === targetId && Number(line.targetId) === sourceId) {
-                    isMovable = true;
-                }
-            }
-        });
+    public getConnectedSquares(squareId: number): Array<number> {
+      let connected = new Array<number>();
 
-        return isMovable;
+      this.boardDataModel.Lines.forEach(line => {
+        if(line.sourceId === squareId) {
+          connected.push(line.targetId);
+        }
+        // 両方向への移動が可能な設定の場合は、逆方向も検索する
+        if(this.moveBidirection){
+          // 逆方向
+          if (line.targetId === squareId) {
+              connected.push(line.sourceId);
+          }
+      }
+      });
+
+      return connected;
     }
 }
