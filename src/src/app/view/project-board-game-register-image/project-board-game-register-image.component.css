@@ -23,6 +23,8 @@
 }
 
 .image-bounds {
+  display: flex;
+  flex-direction: column-reverse;
   width: 40px;
   height: 40px;
   margin-left: auto;
