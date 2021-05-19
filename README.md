@@ -8,7 +8,7 @@
 Issuesに登録してもProjectsに反映される(はず)  
 
 ## 仕様
-- [REST API仕様](https://github.com/msntts/AnkenSugoroku/blob/main/docker/runtime/document/api_spec.md)
+- [REST API仕様](https://github.com/msntts/AnkenSugoroku/blob/main/server/server_src/document/api_spec.md)
 
 ## 貢献
 誰でも/何でもwelcomeです。  
