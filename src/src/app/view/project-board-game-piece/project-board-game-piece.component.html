@@ -1,9 +1,9 @@
 <div class="piece" matTooltip="{{pieceStatus.Name}}" cdkDrag (click)="notifyActivePiece()" (contextmenu)="showMenu($event); $event.preventDefault();">
   <div class="img-container">
-    <img [src]="pieceStatus.ProjectImageUrl" />
+    <img class="img-proj" [src]="pieceStatus.ProjectImageUrl" />
   </div>
   <div class="img-container">
-    <img [src]="pieceStatus.SkillImageUrl" />
+    <img class="img-skill" [src]="pieceStatus.SkillImageUrl" />
   </div>
 </div>
 

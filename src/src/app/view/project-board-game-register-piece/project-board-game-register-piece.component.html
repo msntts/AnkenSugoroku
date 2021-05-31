@@ -2,10 +2,10 @@
   <div style="text-align: center">案件×スキルプレビュー</div>
   <div class="piece-images-container">
     <div class="image-container">
-      <img [src]="selectedProjectImgPath"/>
+      <img class="img-proj" [src]="selectedProjectImgPath"/>
     </div>
     <div class="image-container">
-      <img [src]="selectedSkillImgPath"/>
+      <img class="img-skill" [src]="selectedSkillImgPath"/>
     </div>
   </div>
   <mat-form-field style="display: block; width: 50%; margin-left: auto; margin-right: auto;">
@@ -17,7 +17,7 @@
   <div>案件画像</div>
   <div class="images-container">
     <div class="image-container" *ngFor="let imgPath of projectImagesPath">
-      <img [src]="imgPath" (click)="onProjectImgSelected(imgPath)"/>
+      <img style="margin-right: auto; margin-left: auto;" [src]="imgPath" (click)="onProjectImgSelected(imgPath)"/>
     </div>
   </div>
 </div>
@@ -25,7 +25,7 @@
   <div>スキル画像</div>
   <div class="images-container">
     <div class="image-container" *ngFor="let imgPath of skillImagesPath">
-      <img [src]="imgPath" (click)="onSkillImgSelected(imgPath)"/>
+      <img style="margin-right: auto; margin-left: auto;" [src]="imgPath" (click)="onSkillImgSelected(imgPath)"/>
     </div>
   </div>
 </div>
