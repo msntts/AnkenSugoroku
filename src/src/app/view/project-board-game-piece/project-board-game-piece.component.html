@@ -1,6 +1,4 @@
-<div class="piece" cdkDrag [style.left]="x" [style.top]="y" [style.filter]="filter" [style.opacity]="opacity"
-(click)="notifyActivePiece()"
-  (contextmenu)="showMenu($event); $event.preventDefault();">
+<div class="piece" matTooltip="{{pieceStatus.Name}}" cdkDrag (click)="notifyActivePiece()" (contextmenu)="showMenu($event); $event.preventDefault();">
   <div class="img-container">
     <img [src]="pieceStatus.ProjectImageUrl" />
   </div>

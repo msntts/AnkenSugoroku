@@ -8,6 +8,10 @@
       <img [src]="selectedSkillImgPath"/>
     </div>
   </div>
+  <mat-form-field style="display: block; width: 50%; margin-left: auto; margin-right: auto;">
+    <mat-label>案件名</mat-label>
+    <input matInput #message maxlength="32" [(ngModel)]="pieceName" [value]="pieceName">
+  </mat-form-field>
 </div>
 <div class="root-container">
   <div>案件画像</div>

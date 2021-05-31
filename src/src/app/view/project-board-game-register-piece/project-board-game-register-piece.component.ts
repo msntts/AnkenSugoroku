@@ -19,6 +19,7 @@ export class ProjectBoardGameRegisterPieceComponent implements OnInit {
         this.pieceId = this.data['pieceId'];
         this.selectedProjectImgPath = this.data['selectedProjectImgPath'];
         this.selectedSkillImgPath = this.data['selectedSkillImgPath'];
+        this.pieceName = this.data['pieceName'];
         this.isProjectImgSelected = true;
         this.isSkillImgSelected = true;
         this.asUpdate = true;
@@ -30,6 +31,7 @@ export class ProjectBoardGameRegisterPieceComponent implements OnInit {
 
     public selectedProjectImgPath = "";
     public selectedSkillImgPath = "";
+    public pieceName = "";
     private isProjectImgSelected = false;
     private isSkillImgSelected = false;
     public asUpdate = false;
@@ -76,7 +78,7 @@ export class ProjectBoardGameRegisterPieceComponent implements OnInit {
 
     public register() {
       {
-        this.pieceDataService.postNewPiece("",
+        this.pieceDataService.postNewPiece(this.pieceName,
         this.selectedProjectImgPath, this.selectedSkillImgPath)
         .then((piece) => {
           // 選択状態を戻しておく
@@ -85,6 +87,8 @@ export class ProjectBoardGameRegisterPieceComponent implements OnInit {
           this.selectedSkillImgPath = ''
           this.isSkillImgSelected = false;
 
+          // 名前も初期値に
+          this.pieceName = "";
           // TODO 作成成功しました!とかいう気の利いた通知も出したいところ
         })
         .catch((error) => {
@@ -95,7 +99,7 @@ export class ProjectBoardGameRegisterPieceComponent implements OnInit {
 
     public update() {
       this.pieceDataService.putPiece(this.pieceId,
-      "",
+      this.pieceName,
       this.selectedProjectImgPath, this.selectedSkillImgPath)
       .then((piece) => {
         // TODO 作成成功しました!とかいう気の利いた通知も出したいところ

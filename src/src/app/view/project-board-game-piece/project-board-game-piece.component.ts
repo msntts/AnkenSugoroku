@@ -22,7 +22,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
   /** ピースの固有のID */
   @Input() pieceId: number
-
+  
   /** 位置座標x */
   public x: string = '0px';
 
@@ -54,8 +54,8 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   /**  移動アニメーション 有効/無効 */
   private moveAnimationEnable = false;
 
-  /** ドラッグ中に移動元を明示する  有効/無効 */
-  private readonly showFromMark = true;
+    /** ドラッグ中に移動元を明示する  有効/無効 */
+    private readonly showFromMark = true;
 
 
   /**
@@ -112,6 +112,7 @@ export class ProjectBoardGamePieceComponent implements OnInit {
 
     dialogConfig.data = {
       pieceId: this.pieceStatus.PieceId,
+      pieceName: this.pieceStatus.Name,
       selectedProjectImgPath: this.pieceStatus.ProjectImageUrl,
       selectedSkillImgPath: this.pieceStatus.SkillImageUrl,
     };

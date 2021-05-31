@@ -104,7 +104,7 @@ export class ProjectBoardGameSquareComponent implements OnInit {
   // *ngForのTrack用処理関数
   public trackByItem(index: number, piece: PieceDataModel): string {
     // trackbyでは1つの要素しか見れなさそうだから、変更を監視したいものを全部文字列化する
-    return `${piece.Position}${piece.ProjectImageUrl}${piece.SkillImageUrl}`;
+    return `${piece.Position}${piece.Name}${piece.ProjectImageUrl}${piece.SkillImageUrl}`;
   }
 
   public async drop(event: CdkDragDrop<PieceDataModel[]>) {
