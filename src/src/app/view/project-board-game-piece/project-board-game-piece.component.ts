@@ -23,40 +23,11 @@ export class ProjectBoardGamePieceComponent implements OnInit {
   /** ピースの固有のID */
   @Input() pieceId: number
   
-  /** 位置座標x */
-  public x: string = '0px';
-
-  /** 位置座標y */
-  public y: string = '0px';
-
-  /** 名前 */
-  public name: string = "";
-
-  /* フィルタ */
-  public filter: string = "";
-
-  /* 駒の透明度 */
-  public opacity: number = 1.0;
-
-  /* 移動元の表示 */
-  public fromMarkOn: boolean = false;
-
   /** 駒のステータス */
   public pieceStatus: PieceDataModel;
 
-
-  /** 駒のマス内判定点までのオフセット（左上から） X方向 */
-  private readonly c_offset_x: number = 50;
-
-  /** 駒のマス内判定点までのオフセット（左上から） Y方向 */
-  private readonly c_offset_y: number = 50;
-
   /**  移動アニメーション 有効/無効 */
   private moveAnimationEnable = false;
-
-    /** ドラッグ中に移動元を明示する  有効/無効 */
-    private readonly showFromMark = true;
-
 
   /**
    * コンストラクタ
@@ -88,16 +59,6 @@ export class ProjectBoardGamePieceComponent implements OnInit {
     }
   }
 
-  /**
- * 指定された時間、処理を中断する
- * 本処理を呼び出す場合は、awaitをつけてください。
- * @param milliseconds ミリ秒
- */
-  private sleep(milliseconds: number) {
-    return new Promise<void>(resolve => {
-      setTimeout(() => resolve(), milliseconds);
-    });
-  }
 
   /**
    * 現在のアクティブピースを通知する

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { HistoryModel } from 'src/app/model/history.model';
 import { PieceDataService } from 'src/app/controller/piece-data.service';
 import { ProjectBoardGameEditCommentComponent } from 'src/app/view/project-board-game-edit-comment/project-board-game-edit-comment.component';

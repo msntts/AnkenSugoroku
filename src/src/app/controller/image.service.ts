@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { BoardDataModel } from '../model/board-data.model';
-import { DisplayItemSquare } from '../model/display-item-square.model';
-import { DisplayItemLine } from '../model/display-item-line.model';
-import { stringify } from '@angular/compiler/src/util';
 
 /**
  * プロジェクト画像、スキル画像を管理するクラス
