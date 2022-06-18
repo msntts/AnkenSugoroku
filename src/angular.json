@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "project-board-game"
+  "defaultProject": "project-board-game",
+  "cli": {
+    "analytics": false
+  }
 }
