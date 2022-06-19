@@ -1,91 +1,148 @@
 {
     "board": {
-        "width": 1100,
-        "height": 900
+        "width": 1500,
+        "height": 1100
     },
     "squares": [
         {
-            "id": 1,
+            "id": 0,
             "x": 10,
             "y": 40,
-            "width": 160,
-            "height": 200,
+            "width": 240,
+            "height": 135,
             "content": "START",
             "color": "white",
             "backgroundColor": "blue"
         },
         {
+            "id": 1,
+            "x": 10,
+            "y": 240,
+            "width": 240,
+            "height": 135,
+            "content": "計画合意に向け活動中",
+            "color": "white",
+            "backgroundColor": "green"
+        },
+        {
             "id": 2,
-            "x": 190,
+            "x": 460,
             "y": 40,
-            "width": 160,
-            "height": 200,
-            "content": "活動内容が決まっていない",
-            "color": "black",
-            "backgroundColor": "yellow"
+            "width": 240,
+            "height": 540,
+            "content": "オンスケ（予定よりも進んでいる場合もここ）",
+            "color": "white",
+            "backgroundColor": "green"
         },
         {
             "id": 3,
-            "x": 370,
-            "y": 40,
-            "width": 160,
-            "height": 200,
-            "content": "工程・アウトプットが合意できている",
+            "x": 810,
+            "y": 140,
+            "width": 240,
+            "height": 135,
+            "content": "問い合わせ対応があるかも",
             "color": "white",
             "backgroundColor": "green"
         },
         {
             "id": 4,
-            "x": 550,
-            "y": 40,
-            "width": 160,
-            "height": 200,
-            "content": "計画に対して概ね順調に進んでいる",
-            "color": "white",
-            "backgroundColor": "green"
+            "x": 160,
+            "y": 440,
+            "width": 240,
+            "height": 135,
+            "content": "計画合意に向けた活動ができていない（自責）",
+            "color": "black",
+            "backgroundColor": "yellow"
         },
         {
             "id": 5,
-            "x": 730,
-            "y": 40,
-            "width": 160,
-            "height": 200,
-            "content": "中間生成物などを確認してもらい齟齬なし",
-            "color": "white",
-            "backgroundColor": "green"
+            "x": 10,
+            "y": 640,
+            "width": 240,
+            "height": 135,
+            "content": "計画合意に向けた活動ができていない（他責）",
+            "color": "black",
+            "backgroundColor": "yellow"
         },
         {
             "id": 6,
-            "x": 440,
-            "y": 530,
-            "width": 160,
-            "height": 200,
-            "content": "問題が発生し計画の見直しが必要",
-            "color": "white",
-            "backgroundColor": "red"
+            "x": 310,
+            "y": 640,
+            "width": 240,
+            "height": 135,
+            "content": "計画未合意だが作業中",
+            "color": "black",
+            "backgroundColor": "yellow"
         },
         {
             "id": 7,
-            "x": 680,
-            "y": 530,
-            "width": 160,
-            "height": 200,
+            "x": 810,
+            "y": 340,
+            "width": 240,
+            "height": 135,
             "content": "計画より遅延しているがキャッチアップできると予想",
             "color": "black",
             "backgroundColor": "yellow"
         },
         {
             "id": 8,
-            "x": 910,
+            "x": 1010,
+            "y": 540,
+            "width": 240,
+            "height": 135,
+            "content": "業務遂行に向けた活動ができていない（自責）",
+            "color": "black",
+            "backgroundColor": "yellow"
+        },
+        {
+            "id": 9,
+            "x": 810,
+            "y": 740,
+            "width": 240,
+            "height": 135,
+            "content": "業務遂行に向けた活動ができていない（他責）",
+            "color": "black",
+            "backgroundColor": "yellow"
+        },
+        {
+            "id": 10,
+            "x": 1210,
+            "y": 240,
+            "width": 240,
+            "height": 135,
+            "content": "対応を計画中",
+            "color": "black",
+            "backgroundColor": "yellow"
+        },
+        {
+            "id": 11,
+            "x": 1210,
             "y": 40,
-            "width": 160,
-            "height": 200,
+            "width": 240,
+            "height": 135,
             "content": "GOAL",
             "color": "white",
             "backgroundColor": "blue"
+        },
+        {
+            "id": 12,
+            "x": 360,
+            "y": 940,
+            "width": 720,
+            "height": 135,
+            "content": "問題が発生し計画の見直しが必要",
+            "color": "white",
+            "backgroundColor": "red"
         }
     ],
     "lines": [
+        {
+            "sourceId": 0,
+            "sourcePoint": "bottom",
+            "targetId": 1,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
         {
             "sourceId": 1,
             "sourcePoint": "right",
@@ -95,10 +152,17 @@
         },
         {
             "sourceId": 1,
-            "sourcePoint": "top",
-            "targetId": 3,
+            "sourcePoint": "bottom",
+            "targetId": 4,
             "targetPoint": "top",
-            "connectType": "curve"
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 1,
+            "sourcePoint": "bottom",
+            "targetId": 5,
+            "targetPoint": "top",
+            "connectType": "direct"
         },
         {
             "sourceId": 2,
@@ -108,73 +172,206 @@
             "connectType": "direct"
         },
         {
-            "sourceId": 3,
+            "sourceId": 2,
             "sourcePoint": "right",
-            "targetId": 4,
-            "targetPoint": "left",
-            "connectType": "direct"
-        },
-        {
-            "sourceId": 3,
-            "sourcePoint": "bottom",
             "targetId": 7,
             "targetPoint": "left",
             "connectType": "direct"
         },
         {
-            "sourceId": 4,
-            "sourcePoint": "right",
-            "targetId": 5,
-            "targetPoint": "left",
-            "connectType": "direct"
-        },
-        {
-            "sourceId": 4,
-            "sourcePoint": "bottom",
-            "targetId": 6,
-            "targetPoint": "top",
-            "connectType": "direct"
-        },
-        {
-            "sourceId": 5,
+            "sourceId": 2,
             "sourcePoint": "right",
             "targetId": 8,
             "targetPoint": "left",
             "connectType": "direct"
         },
         {
-            "sourceId": 5,
+            "sourceId": 2,
             "sourcePoint": "bottom",
-            "targetId": 6,
-            "targetPoint": "right",
+            "targetId": 9,
+            "targetPoint": "left",
+            "connectType": "curve"
+        },
+        {
+            "sourceId": 2,
+            "sourcePoint": "right",
+            "targetId": 11,
+            "targetPoint": "left",
             "connectType": "direct"
         },
         {
-            "sourceId": 6,
-            "sourcePoint": "left",
+            "sourceId": 2,
+            "sourcePoint": "bottom",
+            "targetId": 12,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 3,
+            "sourcePoint": "right",
+            "targetId": 10,
+            "targetPoint": "top",
+            "connectType": "curve"
+        },
+        {
+            "sourceId": 3,
+            "sourcePoint": "top",
+            "targetId": 11,
+            "targetPoint": "left",
+            "connectType": "curve"
+        },
+        {
+            "sourceId": 4,
+            "sourcePoint": "top",
             "targetId": 1,
             "targetPoint": "bottom",
             "connectType": "direct"
         },
         {
-            "sourceId": 6,
+            "sourceId": 4,
+            "sourcePoint": "bottom",
+            "targetId": 5,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 5,
             "sourcePoint": "top",
-            "targetId": 3,
+            "targetId": 1,
             "targetPoint": "bottom",
             "connectType": "direct"
         },
         {
-            "sourceId": 7,
+            "sourceId": 5,
             "sourcePoint": "top",
             "targetId": 4,
             "targetPoint": "bottom",
             "connectType": "direct"
         },
+	{
+            "sourceId": 5,
+            "sourcePoint": "right",
+            "targetId": 6,
+            "targetPoint": "left",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 6,
+            "sourcePoint": "top",
+            "targetId": 2,
+            "targetPoint": "left",
+            "connectType": "curve"
+        },
         {
             "sourceId": 7,
             "sourcePoint": "left",
-            "targetId": 6,
+            "targetId": 2,
             "targetPoint": "right",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 7,
+            "sourcePoint": "bottom",
+            "targetId": 8,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 7,
+            "sourcePoint": "bottom",
+            "targetId": 9,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 8,
+            "sourcePoint": "left",
+            "targetId": 2,
+            "targetPoint": "right",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 8,
+            "sourcePoint": "top",
+            "targetId": 7,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 8,
+            "sourcePoint": "bottom",
+            "targetId": 9,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 8,
+            "sourcePoint": "right",
+            "targetId": 10,
+            "targetPoint": "bottom",
+            "connectType": "curve"
+        },
+        {
+            "sourceId": 8,
+            "sourcePoint": "bottom",
+            "targetId": 12,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 9,
+            "sourcePoint": "left",
+            "targetId": 2,
+            "targetPoint": "bottom",
+            "connectType": "curve"
+        },
+        {
+            "sourceId": 9,
+            "sourcePoint": "top",
+            "targetId": 7,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 9,
+            "sourcePoint": "top",
+            "targetId": 8,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 9,
+            "sourcePoint": "bottom",
+            "targetId": 12,
+            "targetPoint": "top",
+            "connectType": "direct"
+        },
+        {
+            "sourceId": 10,
+            "sourcePoint": "left",
+            "targetId": 2,
+            "targetPoint": "right",
+            "connectType": "direct"
+        },
+	{
+            "sourceId": 10,
+            "sourcePoint": "bottom",
+            "targetId": 8,
+            "targetPoint": "right",
+            "connectType": "curve"
+        },
+	{
+            "sourceId": 10,
+            "sourcePoint": "top",
+            "targetId": 11,
+            "targetPoint": "bottom",
+            "connectType": "direct"
+        },
+	{
+            "sourceId": 12,
+            "sourcePoint": "top",
+            "targetId": 2,
+            "targetPoint": "bottom",
             "connectType": "direct"
         }
     ]
