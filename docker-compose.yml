@@ -6,7 +6,7 @@ services:
     container_name: ankendev
     tty: true
     volumes:
-      - ../src:/src
+      - ./src:/src
       - ./set-proxy.sh:/tmp/set-proxy.sh
     environment:
       - http_proxy=${http_proxy}
